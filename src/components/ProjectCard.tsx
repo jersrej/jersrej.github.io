@@ -4,8 +4,8 @@ import { Project } from '../data/project';
 export default function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="h-full p-5 bg-white rounded-lg shadow-sm border flex flex-col">
-      <div className="flex items-center gap-2">
-        <h3 className="font-semibold text-lg">{project.title}</h3>
+      <div className="flex gap-2 justify-between">
+        <h3 className="font-semibold">{project.title}</h3>
         {project.featured && (
           <span className="text-yellow-500" title="Featured Project">
             ⭐

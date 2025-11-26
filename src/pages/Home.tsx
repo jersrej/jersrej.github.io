@@ -21,11 +21,6 @@ export default function Home() {
             <div key={p.id} className="h-full p-4 bg-white rounded-md border flex flex-col">
               <div className="flex items-center gap-2">
                 <h4 className="font-semibold">{p.title}</h4>
-                {p.featured && (
-                  <span className="text-yellow-500" title="Featured Project">
-                    ⭐
-                  </span>
-                )}
               </div>
               <p className="text-xs text-gray-600 mt-1 grow">{p.tagline}</p>
               <div className="flex items-center gap-2 mt-4">
