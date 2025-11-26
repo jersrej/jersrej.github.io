@@ -1,122 +1,73 @@
-Jerson Conmigo — Senior Frontend Engineer
-Summary
+# React + TypeScript + Vite
 
-Senior Frontend Engineer with 14 years in the IT industry and 8+ years specializing in React and TypeScript. I design and deliver scalable frontend architectures, component systems, and production-grade user experiences for enterprise and SaaS products. I lead teams, set frontend standards, and ensure high-quality delivery across multiple platforms.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Skills
+Currently, two official plugins are available:
 
-Frontend: React, TypeScript, Hooks, Context, Redux, shadcn/ui, Tailwind CSS
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-Architecture: Component systems, state management patterns, GraphQL (Apollo), REST APIs, caching strategies
+## React Compiler
 
-Backend & DevOps familiarity: Node.js, NestJS, C#.NET, MySQL, MS SQL, AWS, Azure, CI/CD pipelines
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-Tools & Processes: Figma → Web, Jira, Swagger API, Testing (unit + integration patterns), Accessibility and performance optimization
+## Expanding the ESLint configuration
 
-Selected Projects (NDA-safe case studies)
-Polln — Digital Healthcare Platform
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-Tagline: Multi-application telehealth platform (Patient · Doctor · Admin) with Zoom integration.
-Stack: React · TypeScript · Apollo GraphQL · AWS · S3 · CI/CD · Zoom SDK
-My role & contributions (senior lead):
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-Led frontend architecture for three separate apps, establishing folder structure, component conventions, and delivery patterns.
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-Implemented patient onboarding flows, real-time consultation UI, and prescription workflows.
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-Integrated Zoom SDK for secure in-browser consultations and implemented reconnection/edge-case handling.
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-Optimized GraphQL caching and pagination to reduce perceived load times and network usage.
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-Set up CI pipelines and frontend test strategies to improve release confidence.
-Impact: Delivered three production platforms used in clinical settings; improved onboarding speed and consultation reliability.
-
-Auto Mossa — Global Automotive Parts Portal
-
-Tagline: International online ordering portal for automotive parts.
-Stack: React · TypeScript · shadcn/ui · Hypercode (Node.js + MySQL) · Tailwind CSS
-My role & contributions (senior frontend):
-
-Implemented modular shadcn-based UI components and B2B order flows.
-
-Built high-performance product search, SKU management, and ordering pipelines with attention to large datasets.
-
-Improved accessibility for complex forms and keyboard workflows used by power users.
-Impact: Enabled scalable global orders and improved developer velocity via a reusable component system.
-
-Beyond Strategy — SaaS Meeting & Execution Platform
-
-Tagline: Accountability and action-tracking platform for meeting management.
-Stack: React · TypeScript · Tailwind CSS · C#.NET · MS SQL
-My role & contributions (senior frontend):
-
-Migrated critical UI modules to a centralized Tailwind-based component library.
-
-Implemented robust client-side validation and action logging workflows.
-
-Worked with backend teams on API contracts (Swagger) to ensure stable integrations.
-Impact: Shortened iteration cycles and supported continuous delivery for an expanding customer base.
-
-Gleeson & Cox — JAWS TMS (Transport Management)
-
-Tagline: Core transport management and driver/mobile systems for a major NZ logistics operator.
-Stack: Ember.js · Google Maps API · OData · Swagger API
-My role & contributions (senior frontend):
-
-Owned mapping, routing, and permit/weight compliance UI modules.
-
-Integrated geospatial features and driver app workflows to support daily operations.
-Impact: Helped maintain operational uptime and reliability for logistics workflows.
-
-OnShout — Group Gifting Platform
-
-Tagline: Real-time wishlists and group contributions converted into digital gift cards.
-Stack: React · TypeScript · Tailwind CSS · NestJS · REST APIs
-My role & contributions (frontend):
-
-Built shareable list flows, contribution tracking UI, and payment integration frontends.
-
-Implemented real-time progress updates and simplified sharing experiences.
-Impact: Increased conversion and made group gifting frictionless.
-
-Realista — Real Estate Listings
-
-Tagline: Property search with map-based discovery and listing features.
-Stack: Laravel · JavaScript · jQuery · CSS · Bootstrap
-My role & contributions:
-
-Implemented responsive listing pages, map-driven discovery, and PSD→HTML conversions.
-Impact: Improved engagement and discoverability for property searches.
-
-Twiikflow — Internal Worklog & Billing Tracker
-
-Tagline: Internal project tracking for worklogs, spending, and billing reconciliations.
-Stack: React · TypeScript · Apollo GraphQL · Azure · Tailwind CSS
-My role & contributions:
-
-Rebuilt legacy PHP workflows with a modern React frontend and improved reporting components.
-
-Created reusable time-tracking components and billing audit views.
-Impact: Improved billing accuracy and client transparency.
-
-XPO Group — Event Management (Xpo Showtime)
-
-Tagline: End-to-end event management platform for national expos.
-Stack: React · NestJS · TypeScript · Tailwind CSS · Apollo GraphQL
-My role & contributions:
-
-Modernized internal tools and implemented exhibitor and scheduling management components.
-Impact: Reduced manual coordination and improved exhibitor onboarding workflows.
-
-How I work
-
-I focus on scalable frontend systems, clear API contracts, and developer experience. I set coding standards, drive reusable component systems, and prioritize measurable impact: faster delivery, fewer regressions, and better user outcomes.
-
-Want to see more?
-
-LinkedIn: [https://www.linkedin.com/in/jerson-conmigo/](https://www.linkedin.com/in/jerson-conmigo/)
-
-GitHub: https://github.com/yourhandle
- (public demos & components)
-
-Resume: /resume.pdf
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
