@@ -114,7 +114,7 @@ I focus on scalable frontend systems, clear API contracts, and developer experie
 
 Want to see more?
 
-LinkedIn: [https://linkedin.com/in/yourprofile](https://www.linkedin.com/in/jerson-conmigo/)
+LinkedIn: [https://www.linkedin.com/in/jerson-conmigo/](https://www.linkedin.com/in/jerson-conmigo/)
 
 GitHub: https://github.com/yourhandle
  (public demos & components)
