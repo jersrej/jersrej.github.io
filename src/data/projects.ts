@@ -23,7 +23,8 @@ export const projects: Project[] = [
     ],
     impact:
       'Improved global ordering workflows through consistent UI patterns and scalable frontend components.',
-    featured: false
+    featured: false,
+    link: 'https://www.automossa.com/'
   },
   {
     id: 'beyond',
@@ -56,7 +57,8 @@ export const projects: Project[] = [
     ],
     impact:
       "Improved operational reliability for one of NZ's major logistics companies through consistent UI enhancements.",
-    featured: false
+    featured: false,
+    link: 'https://www.gleesoncox.co.nz/'
   },
   {
     id: 'lamido',
@@ -170,6 +172,7 @@ export const projects: Project[] = [
     ],
     impact:
       'Enabled migration from legacy systems to a scalable Node/NestJS architecture, supporting national expo operations.',
-    featured: false
+    featured: false,
+    link: 'https://www.xpogroup.com/'
   }
 ];
