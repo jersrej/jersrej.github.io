@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { projects } from '../data/project';
+import { projects } from '../data/projects';
 import ProjectCard from '../components/ProjectCard';
 
 function ProjectsList() {
@@ -28,7 +28,7 @@ function ProjectDetail({ id }: { id: string }) {
     <div className="bg-white p-6 rounded-lg shadow">
       <button
         onClick={() => navigate('/projects')}
-        className="text-xs px-3 py-1 border border-[#075985] text-accent rounded mb-4 cursor-pointer"
+        className="text-xs px-3 py-1 border border-accent text-accent rounded mb-4 cursor-pointer"
       >
         ← Back
       </button>

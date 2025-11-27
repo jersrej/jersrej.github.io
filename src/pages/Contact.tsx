@@ -39,7 +39,7 @@ export default function Contact() {
             placeholder="Message"
             className="p-3 border rounded h-32"
           />
-          <button className="px-4 py-2 bg-[#075985] text-white rounded">Send message</button>
+          <button className="px-4 py-2 bg-accent text-white rounded">Send message</button>
         </form>
 
         {sent && <div className="mt-4 text-sm text-green-600">Thanks — I will reply shortly.</div>}

@@ -17,19 +17,19 @@ export const Header = () => {
           <nav className="space-x-4 text-sm">
             <Link
               to="/"
-              className={`py-2 ${loc.pathname === '/' ? 'text-[#075985] font-medium' : 'text-gray-700'}`}
+              className={`py-2 ${loc.pathname === '/' ? 'text-accent font-medium' : 'text-gray-700'}`}
             >
               Home
             </Link>
             <Link
               to="/projects"
-              className={`py-2 ${loc.pathname.startsWith('/projects') ? 'text-[#075985] font-medium' : 'text-gray-700'}`}
+              className={`py-2 ${loc.pathname.startsWith('/projects') ? 'text-accent font-medium' : 'text-gray-700'}`}
             >
               Projects
             </Link>
             <Link
               to="/about"
-              className={`py-2 ${loc.pathname === '/about' ? 'text-[#075985] font-medium' : 'text-gray-700'}`}
+              className={`py-2 ${loc.pathname === '/about' ? 'text-accent font-medium' : 'text-gray-700'}`}
             >
               About
             </Link>
@@ -39,7 +39,7 @@ export const Header = () => {
           <a
             href="/Jerson-Conmigo-CV.pdf"
             target="_blank"
-            className="px-3 py-2 bg-[#075985] text-white rounded text-xs font-medium"
+            className="px-3 py-2 bg-accent text-white rounded text-xs font-medium"
           >
             Download CV
           </a>

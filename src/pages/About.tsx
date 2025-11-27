@@ -55,7 +55,7 @@ export default function About() {
           <a
             href="/Jerson-Conmigo-CV.pdf"
             target="_blank"
-            className="px-4 py-2 bg-[#075985] text-white rounded text-sm"
+            className="px-4 py-2 bg-accent text-white rounded text-sm"
           >
             Download My Resume
           </a>

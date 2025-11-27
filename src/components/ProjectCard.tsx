@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Project } from '../data/project';
+import { Project } from '../data/projects';
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
@@ -24,7 +24,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 text-center py-2 px-4 bg-[#075985] text-white text-sm font-medium rounded transition-colors"
+            className="flex-1 text-center py-2 px-4 bg-accent text-white text-sm font-medium rounded transition-colors"
             onClick={(e) => e.stopPropagation()}
           >
             Visit site

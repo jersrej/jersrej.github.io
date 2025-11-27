@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { projects } from '../data/project';
+import { projects } from '../data/projects';
 
 export default function Home() {
   const featured = projects.filter((p) => p.featured);
@@ -29,7 +29,7 @@ export default function Home() {
                     href={p.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 text-center py-2 px-4 bg-[#075985] text-white text-sm font-medium rounded transition-colors"
+                    className="flex-1 text-center py-2 px-4 bg-accent text-white text-sm font-medium rounded transition-colors"
                     onClick={(e) => e.stopPropagation()}
                   >
                     Visit site
@@ -49,7 +49,7 @@ export default function Home() {
         <div className="mt-6">
           <Link
             to="/projects"
-            className="flex-1 text-center py-2 px-4 bg-[#075985] text-white text-sm font-medium rounded transition-colors"
+            className="flex-1 text-center py-2 px-4 bg-accent text-white text-sm font-medium rounded transition-colors"
           >
             See all projects
           </Link>
