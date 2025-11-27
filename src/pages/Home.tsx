@@ -36,7 +36,7 @@ export default function Home() {
                   </a>
                 )}
                 <Link
-                  to={`/project/${p.id}`}
+                  to={`/projects/${p.id}`}
                   className="flex-1 text-center py-2 px-4 border border-gray-300 text-gray-700 text-sm font-medium rounded hover:bg-gray-50 transition-colors"
                 >
                   View details
