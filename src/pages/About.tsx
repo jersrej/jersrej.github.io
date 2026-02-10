@@ -1,14 +1,19 @@
 export default function About() {
+  const startYear = 2011;
+  const reactStartYear = 2018;
+  const yearsOfExperience = new Date().getFullYear() - startYear;
+  const yearsWithReact = new Date().getFullYear() - reactStartYear;
+
   return (
     <main className="max-w-6xl mx-auto px-6 py-12">
       <section className="bg-white p-8 rounded-lg shadow">
         <h2 className="text-2xl font-bold">About — Jerson Q. Conmigo</h2>
 
         <p className="mt-3 text-sm text-gray-700 leading-relaxed">
-          I am a Senior Frontend Engineer with 14 years of industry experience and over 8 years
-          specializing in React, TypeScript, and modern JavaScript ecosystems. Throughout my career,
-          I’ve delivered enterprise-grade applications across healthcare, logistics, SaaS,
-          e-commerce, and automotive platforms.
+          I am a Senior Frontend Engineer with {yearsOfExperience} years of industry experience and
+          over {yearsWithReact} years specializing in React, TypeScript, and modern JavaScript
+          ecosystems. Throughout my career, I’ve delivered enterprise-grade applications across
+          healthcare, logistics, SaaS, e-commerce, and automotive platforms.
           <br />
           <br />
           My work centers on building scalable UI architectures, establishing reusable component
