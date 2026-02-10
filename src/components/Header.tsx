@@ -8,8 +8,7 @@ export const Header = () => {
         <div className="text-center md:text-left">
           <h1 className="text-lg font-semibold">Jerson Q. Conmigo</h1>
           <p className="text-xs text-gray-600">
-            Senior Frontend Engineer — Fullstack Developer · Front End Developer · Web Developer ·
-            ReactJS · Typescript
+            Senior Frontend Engineer — Front End Developer · Web Developer · ReactJS · TypeScript
           </p>
         </div>
 

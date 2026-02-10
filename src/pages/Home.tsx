@@ -60,10 +60,11 @@ export default function Home() {
         <div className="md:col-span-2 bg-white p-6 rounded-lg shadow">
           <h3 className="font-semibold text-lg">Professional Summary</h3>
           <p className="text-sm text-gray-700 mt-2">
-            Senior Frontend Engineer with extensive experience delivering enterprise-grade
-            applications across healthcare, logistics, SaaS platforms, and e-commerce. I specialize
-            in React, TypeScript, scalable UI architecture, and modern frontend engineering
-            practices.
+            Senior Front-End Engineer specializing in modern front-end development using ReactJS,
+            TypeScript, and scalable UI architectures. Proven track record building and modernizing
+            SaaS platforms, owning front-end initiatives, and collaborating closely with product,
+            design, and backend teams. Front-end focused, with hands-on experience supporting
+            backend APIs and integrations.
           </p>
         </div>
 
