@@ -36,70 +36,131 @@ export const Header = () => {
   };
 
   return (
-    <header className={`bg-white shadow fixed top-0 left-0 right-0 z-50 transition-all ${isScrolled ? 'py-2' : 'py-4'}`}>
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between md:flex-row flex-col md:gap-0 gap-4">
-        <div className="text-center md:text-left">
-          <h1 className={`font-semibold transition-all ${isScrolled ? 'text-base' : 'text-lg'}`}>
-            Jerson Q. Conmigo
-          </h1>
-          <p className="text-xs text-gray-600">
-            Senior Frontend Engineer — Front End Developer · Web Developer · ReactJS · TypeScript
-          </p>
-        </div>
+    <header
+      className={`bg-slate-900/80 backdrop-blur-xl border-b border-white/10 shadow-lg fixed top-0 left-0 right-0 z-50 transition-all ${isScrolled ? 'py-2' : 'py-3'}`}
+    >
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
+        {/* Main header row */}
+        <div className="flex items-center justify-between">
+          {/* Logo/Brand */}
+          <div className="flex-shrink-0">
+            <h1
+              className={`font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent transition-all ${isScrolled ? 'text-sm md:text-base' : 'text-base md:text-lg'}`}
+            >
+              Jerson Q. Conmigo
+            </h1>
+            <p className="text-[10px] md:text-xs text-gray-400 hidden sm:block">
+              Senior Frontend Engineer — ReactJS · TypeScript · Web Developer
+            </p>
+          </div>
 
-        <div className="flex items-center space-x-4">
-          <nav className="space-x-4 text-sm">
-            <a
-              href="#home"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('home');
-              }}
-              className={`py-2 cursor-pointer transition-colors ${activeSection === 'home' ? 'text-accent font-medium' : 'text-gray-700 hover:text-accent'}`}
-            >
-              Home
-            </a>
-            <a
-              href="#projects"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('projects');
-              }}
-              className={`py-2 cursor-pointer transition-colors ${activeSection === 'projects' ? 'text-accent font-medium' : 'text-gray-700 hover:text-accent'}`}
-            >
-              Projects
-            </a>
-            <a
-              href="#about"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('about');
-              }}
-              className={`py-2 cursor-pointer transition-colors ${activeSection === 'about' ? 'text-accent font-medium' : 'text-gray-700 hover:text-accent'}`}
-            >
-              About
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('contact');
-              }}
-              className={`py-2 cursor-pointer transition-colors ${activeSection === 'contact' ? 'text-accent font-medium' : 'text-gray-700 hover:text-accent'}`}
-            >
-              Contact
-            </a>
-          </nav>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-4">
+            <nav className="flex items-center gap-6 text-sm">
+              <a
+                href="#home"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('home');
+                }}
+                className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'home' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'}`}
+              >
+                Home
+              </a>
+              <a
+                href="#projects"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('projects');
+                }}
+                className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'projects' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'}`}
+              >
+                Projects
+              </a>
+              <a
+                href="#about"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('about');
+                }}
+                className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'about' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'}`}
+              >
+                About
+              </a>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('contact');
+                }}
+                className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'contact' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'}`}
+              >
+                Contact
+              </a>
+            </nav>
 
-          {/* Download CV Button */}
+            <a
+              href="/Jerson-Conmigo-CV.pdf"
+              target="_blank"
+              className="px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg text-xs font-medium hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300"
+            >
+              Download CV
+            </a>
+          </div>
+
+          {/* Mobile CV Button - shows on same line as logo */}
           <a
             href="/Jerson-Conmigo-CV.pdf"
             target="_blank"
-            className="px-3 py-2 bg-accent text-white rounded text-xs font-medium hover:bg-opacity-90 transition-colors"
+            className="md:hidden px-3 py-1.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded text-[10px] font-medium whitespace-nowrap"
           >
-            Download CV
+            CV
           </a>
         </div>
+
+        {/* Mobile Navigation - separate row below */}
+        <nav className="md:hidden flex items-center justify-center gap-4 text-xs mt-3 pb-1 border-t border-white/5 pt-3">
+          <a
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection('home');
+            }}
+            className={`cursor-pointer transition-all font-medium ${activeSection === 'home' ? 'text-cyan-400' : 'text-gray-300'}`}
+          >
+            Home
+          </a>
+          <a
+            href="#projects"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection('projects');
+            }}
+            className={`cursor-pointer transition-all font-medium ${activeSection === 'projects' ? 'text-cyan-400' : 'text-gray-300'}`}
+          >
+            Projects
+          </a>
+          <a
+            href="#about"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection('about');
+            }}
+            className={`cursor-pointer transition-all font-medium ${activeSection === 'about' ? 'text-cyan-400' : 'text-gray-300'}`}
+          >
+            About
+          </a>
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection('contact');
+            }}
+            className={`cursor-pointer transition-all font-medium ${activeSection === 'contact' ? 'text-cyan-400' : 'text-gray-300'}`}
+          >
+            Contact
+          </a>
+        </nav>
       </div>
     </header>
   );

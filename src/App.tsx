@@ -6,7 +6,7 @@ import SinglePage from './pages/SinglePage';
 
 export default function App() {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 text-gray-900">
+    <div className="flex flex-col min-h-screen bg-slate-900 text-gray-100">
       <Header />
 
       <div className="flex-1">
