@@ -1,41 +1,81 @@
 import { Link } from 'react-router-dom';
 import { Project } from '../data/projects';
+import { useState } from 'react';
 
 export default function ProjectCard({ project }: { project: Project }) {
-  return (
-    <article className="h-full p-5 bg-white rounded-lg shadow-sm border flex flex-col">
-      <div className="flex gap-2 justify-between">
-        <h3 className="font-semibold">{project.title}</h3>
-        {project.featured && (
-          <span className="text-yellow-500" title="Featured Project">
-            ⭐
-          </span>
-        )}
-      </div>
-      <p className="text-xs text-gray-600 mt-1">{project.tagline}</p>
-      <p className="text-sm mt-3 grow">{project.contributions.join(' · ')}</p>
-      <div className="mt-4 flex items-center justify-between">
-        <div className="text-xs text-gray-500">{project.stack}</div>
-      </div>
+  const [isHovered, setIsHovered] = useState(false);
 
-      <div className="flex items-center gap-2 mt-4">
-        {project.link && (
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 text-center py-2 px-4 bg-accent text-white text-sm font-medium rounded transition-colors"
-            onClick={(e) => e.stopPropagation()}
+  return (
+    <article
+      className="h-full bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 hover:border-cyan-400/30 transition-all duration-500 overflow-hidden group relative card-tilt"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Gradient overlay on hover */}
+      <div className="absolute inset-0 bg-linear-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/5 group-hover:to-blue-500/5 transition-all duration-500 pointer-events-none" />
+
+      <div className="relative p-6 flex flex-col h-full">
+        <div className="flex gap-2 justify-between items-start mb-3">
+          <h3 className="font-semibold text-lg text-white group-hover:text-cyan-400 transition-colors">
+            {project.title}
+          </h3>
+          {project.featured && (
+            <span className="text-yellow-400 text-xl animate-pulse" title="Featured Project">
+              ⭐
+            </span>
+          )}
+        </div>
+
+        <p className="text-xs text-cyan-400 mb-4 font-medium">{project.tagline}</p>
+
+        <p className="text-sm text-gray-300 mb-4 grow leading-relaxed">
+          {project.contributions.join(' · ')}
+        </p>
+
+        {/* Tech stack badges */}
+        <div className="mb-4">
+          <div className="flex flex-wrap gap-2">
+            {project.stack
+              .split(' · ')
+              .slice(0, 4)
+              .map((tech, idx) => (
+                <span
+                  key={idx}
+                  className="text-[10px] px-2 py-1 bg-white/5 text-gray-400 rounded-full border border-white/10"
+                >
+                  {tech}
+                </span>
+              ))}
+          </div>
+        </div>
+
+        {/* Animated buttons */}
+        <div className="flex items-center gap-2 mt-auto">
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 text-center py-2.5 px-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white text-sm font-medium rounded-lg hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 transform hover:-translate-y-0.5"
+              onClick={(e) => e.stopPropagation()}
+            >
+              Visit Site
+            </a>
+          )}
+          <Link
+            to={`/projects/${project.id}`}
+            className="flex-1 text-center py-2.5 px-4 border border-white/20 text-gray-300 text-sm font-medium rounded-lg hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300 transform hover:-translate-y-0.5"
           >
-            Visit site
-          </a>
-        )}
-        <Link
-          to={`/projects/${project.id}`}
-          className="flex-1 text-center py-2 px-4 border border-gray-300 text-gray-700 text-sm font-medium rounded hover:bg-gray-50 transition-colors"
-        >
-          View details
-        </Link>
+            Details
+          </Link>
+        </div>
+
+        {/* Hover indicator */}
+        <div
+          className={`absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-cyan-400 to-blue-400 transition-transform duration-300 ${
+            isHovered ? 'scale-x-100' : 'scale-x-0'
+          }`}
+        />
       </div>
     </article>
   );

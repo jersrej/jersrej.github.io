@@ -1,8 +1,6 @@
-import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 export const Header = () => {
-  const location = useLocation();
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -43,9 +41,9 @@ export const Header = () => {
         {/* Main header row */}
         <div className="flex items-center justify-between">
           {/* Logo/Brand */}
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <h1
-              className={`font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent transition-all ${isScrolled ? 'text-sm md:text-base' : 'text-base md:text-lg'}`}
+              className={`font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent transition-all ${isScrolled ? 'text-sm md:text-base' : 'text-base md:text-lg'}`}
             >
               Jerson Q. Conmigo
             </h1>
@@ -102,7 +100,7 @@ export const Header = () => {
             <a
               href="/Jerson-Conmigo-CV.pdf"
               target="_blank"
-              className="px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg text-xs font-medium hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300"
+              className="px-4 py-2.5 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded-lg text-xs font-medium hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300"
             >
               Download CV
             </a>
@@ -112,7 +110,7 @@ export const Header = () => {
           <a
             href="/Jerson-Conmigo-CV.pdf"
             target="_blank"
-            className="md:hidden px-3 py-1.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded text-[10px] font-medium whitespace-nowrap"
+            className="md:hidden px-3 py-1.5 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded text-[10px] font-medium whitespace-nowrap"
           >
             CV
           </a>
