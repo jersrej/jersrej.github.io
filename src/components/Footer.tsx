@@ -15,7 +15,7 @@ export const Footer = () => {
             jerson.conmigo@gmail.com
           </a>
           <a
-            href="https://linkedin.com/in/jersrej"
+            href="https://linkedin.com/in/jerson-conmigo"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-cyan-400 transition-colors"

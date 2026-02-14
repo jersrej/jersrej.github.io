@@ -76,7 +76,7 @@ export const ContactSection = ({ scrollY }: ContactSectionProps) => {
               </a>
 
               <a
-                href="https://linkedin.com/in/jersrej"
+                href="https://linkedin.com/in/jerson-conmigo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-sm text-white rounded-xl font-medium border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300"

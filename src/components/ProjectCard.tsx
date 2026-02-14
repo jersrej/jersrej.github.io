@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { Project } from '../data/projects';
 import { useState } from 'react';
 
@@ -56,25 +55,17 @@ export default function ProjectCard({ project }: { project: Project }) {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 mt-auto">
-          {project.link && (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 text-center py-2.5 px-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white text-sm font-medium rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105"
-              onClick={(e) => e.stopPropagation()}
-            >
-              Visit Site
-            </a>
-          )}
-          <Link
-            to={`/projects/${project.id}`}
-            className="flex-1 text-center py-2.5 px-4 bg-white/5 border border-white/20 text-gray-300 text-sm font-medium rounded-lg hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300 hover:scale-105"
+        {project.link && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full text-center py-2.5 px-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white text-sm font-medium rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105 mt-auto"
+            onClick={(e) => e.stopPropagation()}
           >
-            Details
-          </Link>
-        </div>
+            Visit Site
+          </a>
+        )}
       </div>
     </article>
   );
