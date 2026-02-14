@@ -82,7 +82,7 @@ const StatCard = ({
 
   return (
     <div
-      className={`text-center p-6 bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 hover:border-cyan-400/30 transition-all duration-500 hover:-translate-y-1 ${
+      className={`text-center p-6 bg-white/50 dark:bg-white/5 backdrop-blur-lg rounded-2xl border border-gray-200 dark:border-white/10 hover:border-cyan-400/30 transition-all duration-500 hover:-translate-y-1 ${
         isVisible ? 'animate-fade-in-up' : 'opacity-0'
       }`}
       style={{ animationDelay: `${delay}ms` }}
@@ -92,7 +92,9 @@ const StatCard = ({
         {count}
         {stat.suffix}
       </div>
-      <div className="text-xs md:text-sm text-gray-400 font-medium">{stat.label}</div>
+      <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400 font-medium">
+        {stat.label}
+      </div>
     </div>
   );
 };

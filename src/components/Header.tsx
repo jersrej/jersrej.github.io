@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { ThemeToggle } from './ThemeToggle';
 
 export const Header = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -35,7 +36,7 @@ export const Header = () => {
 
   return (
     <header
-      className={`bg-slate-900/80 backdrop-blur-xl border-b border-white/10 shadow-lg fixed top-0 left-0 right-0 z-50 transition-all ${isScrolled ? 'py-2' : 'py-3'}`}
+      className={`bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/10 shadow-lg fixed top-0 left-0 right-0 z-50 transition-all ${isScrolled ? 'py-2' : 'py-3'}`}
     >
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         {/* Main header row */}
@@ -47,7 +48,7 @@ export const Header = () => {
             >
               Jerson Q. Conmigo
             </h1>
-            <p className="text-[10px] md:text-xs text-gray-400 hidden sm:block">
+            <p className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400 hidden sm:block">
               Senior Frontend Engineer — ReactJS · TypeScript · Web Developer
             </p>
           </div>
@@ -61,7 +62,7 @@ export const Header = () => {
                   e.preventDefault();
                   scrollToSection('home');
                 }}
-                className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'home' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'}`}
+                className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'home' ? 'text-cyan-400' : 'text-gray-700 dark:text-gray-300 hover:text-cyan-400'}`}
               >
                 Home
               </a>
@@ -71,7 +72,7 @@ export const Header = () => {
                   e.preventDefault();
                   scrollToSection('projects');
                 }}
-                className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'projects' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'}`}
+                className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'projects' ? 'text-cyan-400' : 'text-gray-700 dark:text-gray-300 hover:text-cyan-400'}`}
               >
                 Projects
               </a>
@@ -81,7 +82,7 @@ export const Header = () => {
                   e.preventDefault();
                   scrollToSection('about');
                 }}
-                className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'about' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'}`}
+                className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'about' ? 'text-cyan-400' : 'text-gray-700 dark:text-gray-300 hover:text-cyan-400'}`}
               >
                 About
               </a>
@@ -91,7 +92,7 @@ export const Header = () => {
                   e.preventDefault();
                   scrollToSection('contact');
                 }}
-                className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'contact' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'}`}
+                className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'contact' ? 'text-cyan-400' : 'text-gray-700 dark:text-gray-300 hover:text-cyan-400'}`}
               >
                 Contact
               </a>
@@ -104,27 +105,32 @@ export const Header = () => {
             >
               Download CV
             </a>
+
+            <ThemeToggle />
           </div>
 
-          {/* Mobile CV Button - shows on same line as logo */}
-          <a
-            href="/Jerson-Conmigo-CV.pdf"
-            target="_blank"
-            className="md:hidden px-3 py-1.5 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded text-[10px] font-medium whitespace-nowrap"
-          >
-            CV
-          </a>
+          {/* Mobile Theme + CV Button - shows on same line as logo */}
+          <div className="md:hidden flex items-center gap-2">
+            <a
+              href="/Jerson-Conmigo-CV.pdf"
+              target="_blank"
+              className="px-3 py-1.5 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded text-[10px] font-medium whitespace-nowrap"
+            >
+              CV
+            </a>
+            <ThemeToggle />
+          </div>
         </div>
 
         {/* Mobile Navigation - separate row below */}
-        <nav className="md:hidden flex items-center justify-center gap-4 text-xs mt-3 pb-1 border-t border-white/5 pt-3">
+        <nav className="md:hidden flex items-center justify-center gap-4 text-xs mt-3 pb-1 border-t border-gray-200 dark:border-white/5 pt-3">
           <a
             href="#home"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection('home');
             }}
-            className={`cursor-pointer transition-all font-medium ${activeSection === 'home' ? 'text-cyan-400' : 'text-gray-300'}`}
+            className={`cursor-pointer transition-all font-medium ${activeSection === 'home' ? 'text-cyan-400' : 'text-gray-700 dark:text-gray-300'}`}
           >
             Home
           </a>
@@ -134,7 +140,7 @@ export const Header = () => {
               e.preventDefault();
               scrollToSection('projects');
             }}
-            className={`cursor-pointer transition-all font-medium ${activeSection === 'projects' ? 'text-cyan-400' : 'text-gray-300'}`}
+            className={`cursor-pointer transition-all font-medium ${activeSection === 'projects' ? 'text-cyan-400' : 'text-gray-700 dark:text-gray-300'}`}
           >
             Projects
           </a>
@@ -144,7 +150,7 @@ export const Header = () => {
               e.preventDefault();
               scrollToSection('about');
             }}
-            className={`cursor-pointer transition-all font-medium ${activeSection === 'about' ? 'text-cyan-400' : 'text-gray-300'}`}
+            className={`cursor-pointer transition-all font-medium ${activeSection === 'about' ? 'text-cyan-400' : 'text-gray-700 dark:text-gray-300'}`}
           >
             About
           </a>
@@ -154,7 +160,7 @@ export const Header = () => {
               e.preventDefault();
               scrollToSection('contact');
             }}
-            className={`cursor-pointer transition-all font-medium ${activeSection === 'contact' ? 'text-cyan-400' : 'text-gray-300'}`}
+            className={`cursor-pointer transition-all font-medium ${activeSection === 'contact' ? 'text-cyan-400' : 'text-gray-700 dark:text-gray-300'}`}
           >
             Contact
           </a>

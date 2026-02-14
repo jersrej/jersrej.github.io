@@ -6,7 +6,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 
   return (
     <article
-      className="h-full bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 hover:border-cyan-400/30 transition-all duration-500 overflow-hidden group relative hover:-translate-y-1 hover:shadow-2xl hover:shadow-cyan-500/10"
+      className="h-full bg-white/50 dark:bg-white/5 backdrop-blur-lg rounded-2xl border border-gray-200 dark:border-white/10 hover:border-cyan-400/30 transition-all duration-500 overflow-hidden group relative hover:-translate-y-1 hover:shadow-2xl hover:shadow-cyan-500/10"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -22,7 +22,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 
       <div className="relative p-6 flex flex-col h-full">
         <div className="flex gap-2 justify-between items-start mb-3">
-          <h3 className="font-semibold text-lg text-white group-hover:text-cyan-400 transition-colors">
+          <h3 className="font-semibold text-lg text-gray-900 dark:text-white group-hover:text-cyan-400 transition-colors">
             {project.title}
           </h3>
           {project.featured && (
@@ -34,7 +34,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 
         <p className="text-xs text-cyan-400 mb-4 font-medium">{project.tagline}</p>
 
-        <p className="text-sm text-gray-300 mb-4 grow leading-relaxed">
+        <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 grow leading-relaxed">
           {project.contributions.join(' · ')}
         </p>
 
@@ -47,7 +47,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               .map((tech, idx) => (
                 <span
                   key={idx}
-                  className="text-[10px] px-2 py-1 bg-white/5 text-gray-400 rounded-full border border-white/10"
+                  className="text-[10px] px-2 py-1 bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 rounded-full border border-gray-300 dark:border-white/10"
                 >
                   {tech}
                 </span>

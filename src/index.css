@@ -14,6 +14,21 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Light mode styles */
+  :root {
+    --bg-primary: #0f172a; /* slate-900 */
+    --bg-secondary: #1e293b; /* slate-800 */
+    --text-primary: #f1f5f9; /* slate-100 */
+    --text-secondary: #cbd5e1; /* slate-300 */
+  }
+
+  :root:not(.dark) {
+    --bg-primary: #f8fafc; /* slate-50 */
+    --bg-secondary: #f1f5f9; /* slate-100 */
+    --text-primary: #0f172a; /* slate-900 */
+    --text-secondary: #475569; /* slate-600 */
+  }
+
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
   }

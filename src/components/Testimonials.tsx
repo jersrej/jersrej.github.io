@@ -47,7 +47,7 @@ export const Testimonials = () => {
           <span className="text-sm font-mono text-cyan-400 bg-cyan-400/10 px-4 py-2 rounded-full border border-cyan-400/20 inline-block mb-6">
             Testimonials
           </span>
-          <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+          <h3 className="text-3xl md:text-4xl font-bold bg-linear-to-r from-gray-900 via-gray-700 to-gray-600 dark:from-white dark:via-gray-200 dark:to-gray-400 bg-clip-text text-transparent">
             What People Say
           </h3>
         </div>
@@ -64,7 +64,7 @@ export const Testimonials = () => {
                     : 'opacity-0 translate-x-full'
               }`}
             >
-              <div className="bg-white/5 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/10">
+              <div className="bg-white/50 dark:bg-white/5 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-gray-200 dark:border-white/10">
                 <div className="mb-6">
                   <svg
                     className="w-10 h-10 text-cyan-400 opacity-50"
@@ -74,16 +74,18 @@ export const Testimonials = () => {
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                   </svg>
                 </div>
-                <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 font-light">
+                <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8 font-light">
                   "{testimonial.text}"
                 </p>
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-400 flex items-center justify-center text-white font-bold">
+                  <div className="w-12 h-12 rounded-full bg-linear-to-br from-cyan-400 to-blue-400 flex items-center justify-center text-white font-bold">
                     {testimonial.name.charAt(0)}
                   </div>
                   <div>
-                    <div className="font-semibold text-white">{testimonial.name}</div>
-                    <div className="text-sm text-gray-400">
+                    <div className="font-semibold text-gray-900 dark:text-white">
+                      {testimonial.name}
+                    </div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
                       {testimonial.role} at {testimonial.company}
                     </div>
                   </div>
@@ -100,7 +102,9 @@ export const Testimonials = () => {
               key={index}
               onClick={() => setActiveIndex(index)}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === activeIndex ? 'bg-cyan-400 w-8' : 'bg-gray-600 hover:bg-gray-500'
+                index === activeIndex
+                  ? 'bg-cyan-400 w-8'
+                  : 'bg-gray-400 dark:bg-gray-600 hover:bg-gray-500'
               }`}
               aria-label={`Go to testimonial ${index + 1}`}
             />

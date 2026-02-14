@@ -14,14 +14,14 @@ export const LoadingScreen = () => {
   if (!isLoading) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-slate-900 flex items-center justify-center">
+    <div className="fixed inset-0 z-9999 bg-white dark:bg-slate-900 flex items-center justify-center transition-colors">
       <div className="text-center">
         {/* Animated Logo */}
         <div className="relative mb-8">
           <div className="w-24 h-24 mx-auto relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-2xl animate-spin-slow"></div>
-            <div className="absolute inset-2 bg-slate-900 rounded-xl flex items-center justify-center">
-              <span className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <div className="absolute inset-0 bg-linear-to-r from-cyan-400 to-blue-400 rounded-2xl animate-spin-slow"></div>
+            <div className="absolute inset-2 bg-white dark:bg-slate-900 rounded-xl flex items-center justify-center">
+              <span className="text-3xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 JC
               </span>
             </div>
@@ -29,11 +29,13 @@ export const LoadingScreen = () => {
         </div>
 
         {/* Loading Bar */}
-        <div className="w-64 h-1 bg-slate-800 rounded-full overflow-hidden mx-auto">
-          <div className="h-full bg-gradient-to-r from-cyan-400 to-blue-400 animate-loading-bar"></div>
+        <div className="w-64 h-1 bg-gray-200 dark:bg-slate-800 rounded-full overflow-hidden mx-auto">
+          <div className="h-full bg-linear-to-r from-cyan-400 to-blue-400 animate-loading-bar"></div>
         </div>
 
-        <p className="mt-4 text-sm text-gray-400 animate-pulse">Loading portfolio...</p>
+        <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 animate-pulse">
+          Loading portfolio...
+        </p>
       </div>
     </div>
   );

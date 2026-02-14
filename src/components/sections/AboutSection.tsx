@@ -21,33 +21,37 @@ export const AboutSection = ({ scrollY, yearsOfExperience, yearsWithReact }: Abo
           <span className="text-sm font-mono text-cyan-400 bg-cyan-400/10 px-4 py-2 rounded-full border border-cyan-400/20 inline-block mb-6">
             Background
           </span>
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-linear-to-r from-gray-900 via-gray-700 to-gray-600 dark:from-white dark:via-gray-200 dark:to-gray-400 bg-clip-text text-transparent">
             About Me
           </h2>
         </div>
 
         {/* Main Bio Card */}
-        <div className="bg-white/5 backdrop-blur-xl p-10 md:p-12 rounded-3xl border border-white/10 mb-12 hover:border-white/20 transition-all duration-500 shadow-2xl">
+        <div className="bg-white/50 dark:bg-white/5 backdrop-blur-xl p-10 md:p-12 rounded-3xl border border-gray-200 dark:border-white/10 mb-12 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-500 shadow-2xl">
           <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 via-transparent to-purple-500/5 rounded-3xl"></div>
 
           <div className="relative space-y-6">
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light">
+            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
               I am a <span className="text-cyan-400 font-medium">Senior Frontend Engineer</span>{' '}
               with <span className="text-cyan-400 font-medium">{yearsOfExperience} years</span> of
               industry experience and over{' '}
               <span className="text-cyan-400 font-medium">{yearsWithReact} years</span> specializing
-              in <span className="text-white font-medium">React, TypeScript,</span> and modern
-              JavaScript ecosystems. Throughout my career, I've delivered enterprise-grade
-              applications across healthcare, logistics, SaaS, e-commerce, and automotive platforms.
+              in{' '}
+              <span className="text-gray-900 dark:text-white font-medium">React, TypeScript,</span>{' '}
+              and modern JavaScript ecosystems. Throughout my career, I've delivered
+              enterprise-grade applications across healthcare, logistics, SaaS, e-commerce, and
+              automotive platforms.
             </p>
 
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light">
+            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
               My work centers on building{' '}
-              <span className="text-white font-medium">scalable UI architectures</span>,
-              establishing reusable component systems, owning frontend delivery, and collaborating
+              <span className="text-gray-900 dark:text-white font-medium">
+                scalable UI architectures
+              </span>
+              , establishing reusable component systems, owning frontend delivery, and collaborating
               closely with backend and product teams to ensure technical alignment. I bring strong
               experience across{' '}
-              <span className="text-white font-medium">
+              <span className="text-gray-900 dark:text-white font-medium">
                 GraphQL, REST, CI/CD pipelines, cloud deployments,
               </span>{' '}
               and multi-environment release workflows.
@@ -65,7 +69,7 @@ export const AboutSection = ({ scrollY, yearsOfExperience, yearsWithReact }: Abo
 
         {/* Skills Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="group relative bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-cyan-400/30 transition-all duration-500 hover:-translate-y-1">
+          <div className="group relative bg-white/50 dark:bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-cyan-400/30 transition-all duration-500 hover:-translate-y-1">
             <div className="absolute inset-0 bg-linear-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/5 group-hover:to-blue-500/5 rounded-2xl transition-all duration-500"></div>
 
             <div className="relative">
@@ -84,15 +88,17 @@ export const AboutSection = ({ scrollY, yearsOfExperience, yearsWithReact }: Abo
                   />
                 </svg>
               </div>
-              <h4 className="font-semibold text-xl mb-3 text-white">Core Skills</h4>
-              <p className="text-sm text-gray-400 leading-relaxed">
+              <h4 className="font-semibold text-xl mb-3 text-gray-900 dark:text-white">
+                Core Skills
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 React · TypeScript · GraphQL · REST APIs · TailwindCSS · UI Architecture · Component
                 Libraries · State Management · Performance Optimization
               </p>
             </div>
           </div>
 
-          <div className="group relative bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-400/30 transition-all duration-500 hover:-translate-y-1">
+          <div className="group relative bg-white/50 dark:bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-purple-400/30 transition-all duration-500 hover:-translate-y-1">
             <div className="absolute inset-0 bg-linear-to-br from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/5 group-hover:to-pink-500/5 rounded-2xl transition-all duration-500"></div>
 
             <div className="relative">
@@ -111,8 +117,10 @@ export const AboutSection = ({ scrollY, yearsOfExperience, yearsWithReact }: Abo
                   />
                 </svg>
               </div>
-              <h4 className="font-semibold text-xl mb-3 text-white">Engineering Approach</h4>
-              <p className="text-sm text-gray-400 leading-relaxed">
+              <h4 className="font-semibold text-xl mb-3 text-gray-900 dark:text-white">
+                Engineering Approach
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 Strong focus on reliability, maintainability, and alignment with backend API
                 designs. I emphasize scalable patterns, predictable behavior, readable code, and
                 reducing tech debt through thoughtful engineering.
@@ -120,7 +128,7 @@ export const AboutSection = ({ scrollY, yearsOfExperience, yearsWithReact }: Abo
             </div>
           </div>
 
-          <div className="group relative bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-green-400/30 transition-all duration-500 hover:-translate-y-1">
+          <div className="group relative bg-white/50 dark:bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-green-400/30 transition-all duration-500 hover:-translate-y-1">
             <div className="absolute inset-0 bg-linear-to-br from-green-500/0 to-teal-500/0 group-hover:from-green-500/5 group-hover:to-teal-500/5 rounded-2xl transition-all duration-500"></div>
 
             <div className="relative">
@@ -139,8 +147,10 @@ export const AboutSection = ({ scrollY, yearsOfExperience, yearsWithReact }: Abo
                   />
                 </svg>
               </div>
-              <h4 className="font-semibold text-xl mb-3 text-white">Notable Achievements</h4>
-              <p className="text-sm text-gray-400 leading-relaxed">
+              <h4 className="font-semibold text-xl mb-3 text-gray-900 dark:text-white">
+                Notable Achievements
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 Led frontend architecture for multiple high-traffic applications, implemented design
                 systems, reduced bundle sizes significantly, and mentored junior developers.
               </p>

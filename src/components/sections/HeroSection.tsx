@@ -40,15 +40,15 @@ export const HeroSection = ({ scrollY, featured }: HeroSectionProps) => {
           </span>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 md:mb-6 bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent leading-tight px-4">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 md:mb-6 bg-linear-to-r from-gray-900 via-gray-700 to-gray-600 dark:from-white dark:via-gray-200 dark:to-gray-400 bg-clip-text text-transparent leading-tight px-4">
           Jerson Q. Conmigo
         </h1>
 
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-gray-300 mb-6 md:mb-8 tracking-wide px-4">
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-gray-700 dark:text-gray-300 mb-6 md:mb-8 tracking-wide px-4">
           Senior Frontend Engineer
         </h2>
 
-        <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-8 md:mb-12 leading-relaxed font-light px-4">
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8 md:mb-12 leading-relaxed font-light px-4">
           I architect and deliver enterprise-scale frontend systems with a strong emphasis on
           reliability, maintainability, and long-term product stability.
         </p>
@@ -58,7 +58,7 @@ export const HeroSection = ({ scrollY, featured }: HeroSectionProps) => {
           {featured.map((p, index) => (
             <div
               key={p.id}
-              className="group relative bg-white/5 backdrop-blur-lg p-6 rounded-2xl border border-white/10 hover:border-cyan-400/30 transition-all duration-500 hover:scale-105 hover:bg-white/10"
+              className="group relative bg-white/50 dark:bg-white/5 backdrop-blur-lg p-6 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-cyan-400/30 transition-all duration-500 hover:scale-105 hover:bg-white/70 dark:hover:bg-white/10"
               style={{
                 animation: `fadeInUp 0.8s ease-out ${index * 0.15}s both`
               }}
@@ -66,10 +66,12 @@ export const HeroSection = ({ scrollY, featured }: HeroSectionProps) => {
               <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
               <div className="relative z-10">
-                <h4 className="font-semibold text-lg mb-3 text-white group-hover:text-cyan-400 transition-colors">
+                <h4 className="font-semibold text-lg mb-3 text-gray-900 dark:text-white group-hover:text-cyan-400 transition-colors">
                   {p.title}
                 </h4>
-                <p className="text-sm text-gray-400 mb-6 leading-relaxed">{p.tagline}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                  {p.tagline}
+                </p>
                 {p.link && (
                   <a
                     href={p.link}
@@ -123,7 +125,7 @@ export const HeroSection = ({ scrollY, featured }: HeroSectionProps) => {
 
           <a
             href="#contact"
-            className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-white/5 backdrop-blur-sm text-white rounded-lg font-medium border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-white/50 dark:bg-white/5 backdrop-blur-sm text-gray-900 dark:text-white rounded-lg font-medium border border-gray-300 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/10 hover:border-gray-400 dark:hover:border-white/20 transition-all duration-300"
           >
             Get in Touch
           </a>
@@ -136,7 +138,7 @@ export const HeroSection = ({ scrollY, featured }: HeroSectionProps) => {
         style={{ opacity: Math.max(0, 1 - scrollY / 300) }}
       >
         <div className="relative group">
-          <div className="w-8 h-12 rounded-full border-2 border-cyan-400/50 flex items-start justify-center p-2 bg-slate-900/30 backdrop-blur-sm hover:border-cyan-400 transition-colors">
+          <div className="w-8 h-12 rounded-full border-2 border-cyan-400/50 flex items-start justify-center p-2 bg-white/30 dark:bg-slate-900/30 backdrop-blur-sm hover:border-cyan-400 transition-colors">
             <div className="w-1.5 h-4 bg-cyan-400 rounded-full animate-pulse shadow-lg shadow-cyan-400/50"></div>
           </div>
           <div className="absolute -left-24 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">

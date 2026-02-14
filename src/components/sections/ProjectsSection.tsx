@@ -11,7 +11,7 @@ export const ProjectsSection = ({ scrollY, projects }: ProjectsSectionProps) => 
     <section id="projects" className="min-h-screen py-32 relative">
       {/* Section Background with Parallax */}
       <div
-        className="absolute inset-0 bg-linear-to-b from-slate-900 via-slate-800/50 to-slate-900"
+        className="absolute inset-0 bg-linear-to-b from-slate-50 via-slate-100/50 to-slate-50 dark:from-slate-900 dark:via-slate-800/50 dark:to-slate-900"
         style={{ transform: `translateY(${(scrollY - 800) * 0.1}px)` }}
       ></div>
 
@@ -20,10 +20,10 @@ export const ProjectsSection = ({ scrollY, projects }: ProjectsSectionProps) => 
           <span className="text-sm font-mono text-cyan-400 bg-cyan-400/10 px-4 py-2 rounded-full border border-cyan-400/20 inline-block mb-6">
             Portfolio
           </span>
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-linear-to-r from-gray-900 via-gray-700 to-gray-600 dark:from-white dark:via-gray-200 dark:to-gray-400 bg-clip-text text-transparent">
             Featured Projects
           </h2>
-          <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light">
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed font-light">
             A collection of enterprise applications and products I've built and contributed to
             throughout my career.
           </p>
