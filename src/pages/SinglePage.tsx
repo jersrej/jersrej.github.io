@@ -11,6 +11,7 @@ import { HeroSection } from '../components/sections/HeroSection';
 import { ProjectsSection } from '../components/sections/ProjectsSection';
 import { AboutSection } from '../components/sections/AboutSection';
 import { ContactSection } from '../components/sections/ContactSection';
+import { featured } from '../utils/constants';
 
 export default function SinglePage() {
   const location = useLocation();
@@ -36,12 +37,6 @@ export default function SinglePage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const startYear = 2011;
-  const reactStartYear = 2018;
-  const yearsOfExperience = new Date().getFullYear() - startYear;
-  const yearsWithReact = new Date().getFullYear() - reactStartYear;
-  const featured = projects.filter((p) => p.featured);
-
   return (
     <>
       <LoadingScreen />
@@ -59,11 +54,7 @@ export default function SinglePage() {
         <HeroSection scrollY={scrollY} featured={featured} />
         <AnimatedStats />
         <ProjectsSection scrollY={scrollY} projects={projects} />
-        <AboutSection
-          scrollY={scrollY}
-          yearsOfExperience={yearsOfExperience}
-          yearsWithReact={yearsWithReact}
-        />
+        <AboutSection scrollY={scrollY} />
         {/* let's add this later If I collected from my previous clients
         <Testimonials /> */}
         <ContactSection scrollY={scrollY} />

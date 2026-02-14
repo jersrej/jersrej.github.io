@@ -9,10 +9,10 @@ export const HeroSection = ({ scrollY, featured }: HeroSectionProps) => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-32 md:pt-24"
+      className="min-h-screen flex items-center justify-center relative pt-32 md:pt-24 pb-20 md:pb-32"
     >
       {/* Animated Gradient Orbs with Parallax */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden -z-10">
         <div
           className="absolute top-20 -left-20 w-96 h-96 bg-linear-to-r from-blue-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"
           style={{ transform: `translateY(${scrollY * 0.2}px)` }}

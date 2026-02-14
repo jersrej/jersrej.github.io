@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { yearsOfExperience, yearsWithReact } from '../utils/constants';
 
 interface Stat {
   value: number;
@@ -8,10 +9,10 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: 15, label: 'Years Experience', suffix: '+' },
-  { value: 8, label: 'Years with React', suffix: '+' },
-  { value: 25, label: 'Projects Completed', suffix: '+' },
-  { value: 12, label: 'Technologies Mastered', suffix: '+' }
+  { value: yearsOfExperience, label: 'Years Experience', suffix: '+' },
+  { value: yearsWithReact, label: 'Years with React', suffix: '+' },
+  { value: 10, label: 'Projects Completed', suffix: '+' },
+  { value: 10, label: 'Technologies Mastered', suffix: '+' }
 ];
 
 export const AnimatedStats = () => {
@@ -87,7 +88,7 @@ const StatCard = ({
       }`}
       style={{ animationDelay: `${delay}ms` }}
     >
-      <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
+      <div className="text-3xl md:text-4xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
         {stat.prefix}
         {count}
         {stat.suffix}

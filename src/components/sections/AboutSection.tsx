@@ -1,14 +1,13 @@
 import { SkillCategorySection } from '../SkillCategorySection';
 import { AchievementCard } from '../AchievementCard';
 import { getSkillsData } from '../../data/skillsData';
+import { yearsOfExperience, yearsWithReact } from '../../utils/constants';
 
 interface AboutSectionProps {
   scrollY: number;
-  yearsOfExperience: number;
-  yearsWithReact: number;
 }
 
-export const AboutSection = ({ scrollY, yearsOfExperience, yearsWithReact }: AboutSectionProps) => {
+export const AboutSection = ({ scrollY }: AboutSectionProps) => {
   const skills = getSkillsData({ yearsOfExperience, yearsWithReact });
 
   const frontendSkills = skills.filter((s) => s.category === 'frontend');
