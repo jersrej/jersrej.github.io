@@ -176,13 +176,18 @@ export default function SinglePage() {
             </div>
           </div>
 
-          {/* Scroll Indicator */}
+          {/* Scroll Indicator - Repositioned to bottom right */}
           <div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
+            className="fixed bottom-8 right-8 z-20 animate-bounce"
             style={{ opacity: Math.max(0, 1 - scrollY / 300) }}
           >
-            <div className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-2">
-              <div className="w-1 h-3 bg-white/60 rounded-full animate-pulse"></div>
+            <div className="relative group">
+              <div className="w-8 h-12 rounded-full border-2 border-cyan-400/50 flex items-start justify-center p-2 bg-slate-900/30 backdrop-blur-sm hover:border-cyan-400 transition-colors">
+                <div className="w-1.5 h-4 bg-cyan-400 rounded-full animate-pulse shadow-lg shadow-cyan-400/50"></div>
+              </div>
+              <div className="absolute -left-24 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                <span className="text-xs text-cyan-400 font-medium">Scroll down</span>
+              </div>
             </div>
           </div>
         </section>
@@ -216,24 +221,11 @@ export default function SinglePage() {
               {projects.map((p, index) => (
                 <div
                   key={p.id}
-                  className="group"
                   style={{
                     animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
                   }}
                 >
-                  <div className="relative bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-cyan-400/30 transition-all duration-500 hover:-translate-y-2 h-full">
-                    {/* Hover Gradient Overlay */}
-                    <div className="absolute inset-0 bg-linear-to-br from-cyan-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-cyan-500/5 group-hover:via-purple-500/5 group-hover:to-pink-500/5 rounded-2xl transition-all duration-500"></div>
-
-                    <div className="relative z-10">
-                      <ProjectCard project={p} />
-                    </div>
-
-                    {/* Glow Effect on Hover */}
-                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10">
-                      <div className="absolute inset-0 bg-linear-to-r from-cyan-500/20 to-purple-500/20 blur-xl rounded-2xl"></div>
-                    </div>
-                  </div>
+                  <ProjectCard project={p} />
                 </div>
               ))}
             </div>
