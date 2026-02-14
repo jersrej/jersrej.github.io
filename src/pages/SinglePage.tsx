@@ -4,7 +4,6 @@ import { projects } from '../data/projects';
 import { LoadingScreen } from '../components/LoadingScreen';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { AnimatedStats } from '../components/AnimatedStats';
-import { Testimonials } from '../components/Testimonials';
 import { FloatingParticles } from '../components/FloatingParticles';
 import { MagneticCursor } from '../components/MagneticCursor';
 import { HeroSection } from '../components/sections/HeroSection';
@@ -68,7 +67,8 @@ export default function SinglePage() {
           yearsWithReact={yearsWithReact}
         />
 
-        <Testimonials />
+        {/* let's add this later If I collected from my previous clients
+        <Testimonials /> */}
 
         <ContactSection scrollY={scrollY} />
       </main>
