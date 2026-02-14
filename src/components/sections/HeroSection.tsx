@@ -104,7 +104,8 @@ export const HeroSection = ({ scrollY, featured }: HeroSectionProps) => {
         <div className="mt-8 md:mt-16 flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
           <a
             href="#projects"
-            className="group relative inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded-lg font-medium overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/40"
+            className="group relative inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded-lg font-medium overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/40 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2"
+            aria-label="Navigate to projects section"
           >
             <span className="relative z-10">View All Projects</span>
             <svg
@@ -112,6 +113,7 @@ export const HeroSection = ({ scrollY, featured }: HeroSectionProps) => {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -124,8 +126,33 @@ export const HeroSection = ({ scrollY, featured }: HeroSectionProps) => {
           </a>
 
           <a
+            href="/Jerson-Conmigo-CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-white/50 dark:bg-white/5 backdrop-blur-sm text-gray-900 dark:text-white rounded-lg font-medium border border-gray-300 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/10 hover:border-gray-400 dark:hover:border-white/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+            aria-label="Download Jerson Conmigo's CV (PDF)"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            Download CV
+          </a>
+
+          <a
             href="#contact"
-            className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-white/50 dark:bg-white/5 backdrop-blur-sm text-gray-900 dark:text-white rounded-lg font-medium border border-gray-300 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/10 hover:border-gray-400 dark:hover:border-white/20 transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-white/50 dark:bg-white/5 backdrop-blur-sm text-gray-900 dark:text-white rounded-lg font-medium border border-gray-300 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/10 hover:border-gray-400 dark:hover:border-white/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+            aria-label="Navigate to contact section"
           >
             Get in Touch
           </a>
@@ -136,6 +163,8 @@ export const HeroSection = ({ scrollY, featured }: HeroSectionProps) => {
       <div
         className="fixed bottom-8 right-8 z-20 animate-bounce"
         style={{ opacity: Math.max(0, 1 - scrollY / 300) }}
+        role="presentation"
+        aria-hidden="true"
       >
         <div className="relative group">
           <div className="w-8 h-12 rounded-full border-2 border-cyan-400/50 flex items-start justify-center p-2 bg-white/30 dark:bg-slate-900/30 backdrop-blur-sm hover:border-cyan-400 transition-colors">

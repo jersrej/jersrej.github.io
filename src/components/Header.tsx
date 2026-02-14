@@ -36,6 +36,8 @@ export const Header = () => {
 
   return (
     <header
+      role="banner"
+      aria-label="Main navigation"
       className={`bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/10 shadow-lg fixed top-0 left-0 right-0 z-50 transition-all ${isScrolled ? 'py-2' : 'py-3'}`}
     >
       <div className="max-w-6xl mx-auto px-4 md:px-6">
@@ -55,7 +57,11 @@ export const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-4">
-            <nav className="flex items-center gap-6 text-sm">
+            <nav
+              className="flex items-center gap-6 text-sm"
+              role="navigation"
+              aria-label="Primary navigation"
+            >
               <a
                 href="#home"
                 onClick={(e) => {
@@ -63,6 +69,7 @@ export const Header = () => {
                   scrollToSection('home');
                 }}
                 className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'home' ? 'text-cyan-400' : 'text-gray-700 dark:text-gray-300 hover:text-cyan-400'}`}
+                aria-current={activeSection === 'home' ? 'page' : undefined}
               >
                 Home
               </a>
@@ -73,6 +80,7 @@ export const Header = () => {
                   scrollToSection('projects');
                 }}
                 className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'projects' ? 'text-cyan-400' : 'text-gray-700 dark:text-gray-300 hover:text-cyan-400'}`}
+                aria-current={activeSection === 'projects' ? 'page' : undefined}
               >
                 Projects
               </a>
@@ -83,6 +91,7 @@ export const Header = () => {
                   scrollToSection('about');
                 }}
                 className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'about' ? 'text-cyan-400' : 'text-gray-700 dark:text-gray-300 hover:text-cyan-400'}`}
+                aria-current={activeSection === 'about' ? 'page' : undefined}
               >
                 About
               </a>
@@ -93,6 +102,7 @@ export const Header = () => {
                   scrollToSection('contact');
                 }}
                 className={`py-2 cursor-pointer transition-all font-medium ${activeSection === 'contact' ? 'text-cyan-400' : 'text-gray-700 dark:text-gray-300 hover:text-cyan-400'}`}
+                aria-current={activeSection === 'contact' ? 'page' : undefined}
               >
                 Contact
               </a>
@@ -101,7 +111,9 @@ export const Header = () => {
             <a
               href="/Jerson-Conmigo-CV.pdf"
               target="_blank"
-              className="px-4 py-2.5 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded-lg text-xs font-medium hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300"
+              rel="noopener noreferrer"
+              className="px-4 py-2.5 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded-lg text-xs font-medium hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2"
+              aria-label="Download Jerson Conmigo's CV (PDF)"
             >
               Download CV
             </a>
@@ -114,7 +126,9 @@ export const Header = () => {
             <a
               href="/Jerson-Conmigo-CV.pdf"
               target="_blank"
-              className="px-3 py-1.5 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded text-[10px] font-medium whitespace-nowrap"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded text-[10px] font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              aria-label="Download Jerson Conmigo's CV (PDF)"
             >
               CV
             </a>
@@ -123,7 +137,11 @@ export const Header = () => {
         </div>
 
         {/* Mobile Navigation - separate row below */}
-        <nav className="md:hidden flex items-center justify-center gap-4 text-xs mt-3 pb-1 border-t border-gray-200 dark:border-white/5 pt-3">
+        <nav
+          className="md:hidden flex items-center justify-center gap-4 text-xs mt-3 pb-1 border-t border-gray-200 dark:border-white/5 pt-3"
+          role="navigation"
+          aria-label="Mobile navigation"
+        >
           <a
             href="#home"
             onClick={(e) => {

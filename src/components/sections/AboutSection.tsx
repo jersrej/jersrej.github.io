@@ -27,14 +27,14 @@ export const AboutSection = ({ scrollY, yearsOfExperience, yearsWithReact }: Abo
       </div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
+        <header className="text-center mb-16">
           <span className="text-sm font-mono text-cyan-400 bg-cyan-400/10 px-4 py-2 rounded-full border border-cyan-400/20 inline-block mb-6">
             Background
           </span>
           <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-linear-to-r from-gray-900 via-gray-700 to-gray-600 dark:from-white dark:via-gray-200 dark:to-gray-400 bg-clip-text text-transparent">
             About Me
           </h2>
-        </div>
+        </header>
 
         {/* Main Bio Card */}
         <div className="bg-white/50 dark:bg-white/5 backdrop-blur-xl p-10 md:p-12 rounded-3xl border border-gray-200 dark:border-white/10 mb-12 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-500 shadow-2xl">

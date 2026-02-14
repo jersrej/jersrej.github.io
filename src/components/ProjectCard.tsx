@@ -9,6 +9,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       className="h-full bg-white/50 dark:bg-white/5 backdrop-blur-lg rounded-2xl border border-gray-200 dark:border-white/10 hover:border-cyan-400/30 transition-all duration-500 overflow-hidden group relative hover:-translate-y-1 hover:shadow-2xl hover:shadow-cyan-500/10"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      aria-label={`Project: ${project.title}`}
     >
       {/* Top gradient indicator */}
       <div
@@ -60,8 +61,9 @@ export default function ProjectCard({ project }: { project: Project }) {
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full text-center py-2.5 px-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white text-sm font-medium rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105 mt-auto"
+            className="w-full text-center py-2.5 px-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white text-sm font-medium rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105 mt-auto focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2"
             onClick={(e) => e.stopPropagation()}
+            aria-label={`Visit ${project.title} website`}
           >
             Visit Site
           </a>
