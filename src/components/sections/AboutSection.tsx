@@ -36,11 +36,11 @@ export const AboutSection = ({ scrollY }: AboutSectionProps) => {
         </header>
 
         {/* Main Bio Card */}
-        <div className="bg-white/50 dark:bg-white/5 backdrop-blur-xl p-10 md:p-12 rounded-3xl border border-gray-200 dark:border-white/10 mb-12 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-500 shadow-2xl">
+        <div className="bg-white/50 dark:bg-white/5 backdrop-blur-xl p-5 md:p-12 rounded-3xl border border-gray-200 dark:border-white/10 mb-12 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-500 shadow-2xl">
           <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 via-transparent to-purple-500/5 rounded-3xl"></div>
 
           <div className="relative space-y-6">
-            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
+            <p className="text-sm md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
               I am a <span className="text-cyan-400 font-medium">Senior Frontend Engineer</span>{' '}
               with <span className="text-cyan-400 font-medium">{yearsOfExperience} years</span> of
               industry experience and over{' '}
@@ -52,7 +52,7 @@ export const AboutSection = ({ scrollY }: AboutSectionProps) => {
               automotive platforms.
             </p>
 
-            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
+            <p className="text-sm md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
               My work centers on building{' '}
               <span className="text-gray-900 dark:text-white font-medium">
                 scalable UI architectures
@@ -66,7 +66,7 @@ export const AboutSection = ({ scrollY }: AboutSectionProps) => {
               and multi-environment release workflows.
             </p>
 
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light">
+            <p className="text-sm md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
               Beyond hands-on engineering, I advocate for clean code, predictable state management,
               accessibility, meaningful developer experience improvements, and long-term
               maintainability. I enjoy taking ambiguous requirements, shaping the technical

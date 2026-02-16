@@ -35,7 +35,7 @@ export const SkillCard = ({ name, years, proficiency, category, icon }: SkillCar
 
   return (
     <div
-      className={`group relative bg-white/50 dark:bg-white/5 backdrop-blur-lg p-6 rounded-xl border border-gray-200 dark:border-white/10 hover:${colors.border} transition-all duration-500 hover:-translate-y-1 h-full`}
+      className={`group relative bg-white/50 dark:bg-white/5 backdrop-blur-lg p-4 md:p-6 rounded-xl border border-gray-200 dark:border-white/10 hover:${colors.border} transition-all duration-500 hover:-translate-y-1 h-full`}
     >
       <div
         className={`absolute inset-0 bg-linear-to-br from-transparent to-transparent group-hover:${colors.gradient} rounded-xl transition-all duration-500`}

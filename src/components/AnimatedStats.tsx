@@ -12,7 +12,7 @@ const stats: Stat[] = [
   { value: yearsOfExperience, label: 'Years Experience', suffix: '+' },
   { value: yearsWithReact, label: 'Years with React', suffix: '+' },
   { value: 10, label: 'Projects Completed', suffix: '+' },
-  { value: 10, label: 'Technologies Mastered', suffix: '+' }
+  { value: 10, label: 'Tech Stack', suffix: '+' }
 ];
 
 export const AnimatedStats = () => {

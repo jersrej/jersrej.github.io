@@ -9,31 +9,25 @@ export const HeroSection = ({ scrollY, featured }: HeroSectionProps) => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative pt-32 md:pt-24 pb-20 md:pb-32"
+      className="min-h-screen flex items-center justify-center relative pt-32 md:pt-24"
     >
-      {/* Animated Gradient Orbs with Parallax */}
+      {/* Animated Gradient Orbs */}
       <div className="absolute inset-0 overflow-hidden -z-10">
         <div
           className="absolute top-20 -left-20 w-96 h-96 bg-linear-to-r from-blue-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"
-          style={{ transform: `translateY(${scrollY * 0.2}px)` }}
+          style={{ transform: 'translateZ(0)' }}
         ></div>
         <div
           className="absolute top-40 -right-20 w-96 h-96 bg-linear-to-r from-purple-500 to-pink-500 rounded-full blur-3xl opacity-20 animate-pulse"
-          style={{ transform: `translateY(${scrollY * 0.15}px)`, animationDelay: '1s' }}
+          style={{ transform: 'translateZ(0)', animationDelay: '1s' }}
         ></div>
         <div
-          className="absolute -bottom-20 left-1/2 w-96 h-96 bg-linear-to-r from-green-500 to-teal-500 rounded-full blur-3xl opacity-10"
-          style={{ transform: `translate(-50%, ${-scrollY * 0.1}px)` }}
+          className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-linear-to-r from-green-500 to-teal-500 rounded-full blur-3xl opacity-10 animate-pulse"
+          style={{ transform: 'translate(-50%, 0) translateZ(0)', animationDelay: '2s' }}
         ></div>
       </div>
 
-      <div
-        className="max-w-6xl mx-auto px-4 md:px-6 text-center z-10 relative"
-        style={{
-          transform: `translateY(${scrollY * 0.3}px)`,
-          opacity: Math.max(0, 1 - scrollY / 800)
-        }}
-      >
+      <div className="max-w-6xl mx-auto px-4 md:px-6 text-center z-10 relative">
         <div className="mb-4 md:mb-6 inline-block">
           <span className="text-xs md:text-sm font-mono text-cyan-400 bg-cyan-400/10 px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-cyan-400/20">
             Available for new opportunities

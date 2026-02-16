@@ -21,7 +21,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       {/* Gradient overlay on hover */}
       <div className="absolute inset-0 bg-linear-to-br from-cyan-500/0 via-purple-500/0 to-blue-500/0 group-hover:from-cyan-500/5 group-hover:via-purple-500/3 group-hover:to-blue-500/5 transition-all duration-500 pointer-events-none" />
 
-      <div className="relative p-6 flex flex-col h-full">
+      <div className="relative p-5 md:p-6 flex flex-col h-full">
         <div className="flex gap-2 justify-between items-start mb-3">
           <h3 className="font-semibold text-lg text-gray-900 dark:text-white group-hover:text-cyan-400 transition-colors">
             {project.title}
