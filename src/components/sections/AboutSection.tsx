@@ -44,9 +44,11 @@ export const AboutSection = () => {
                     .map((s) => (
                       <span key={s.name}>
                         {s.name}
-                        <span className="ml-1 font-mono text-xs opacity-70 deck:max-md:hidden short:hidden">
-                          {formatYears(yearsSince(s.since))}
-                        </span>
+                        {s.since !== undefined && (
+                          <span className="ml-1 font-mono text-xs opacity-70 deck:max-md:hidden short:hidden">
+                            {formatYears(yearsSince(s.since, s.sinceMonth))}
+                          </span>
+                        )}
                       </span>
                     ))}
                 </dd>
