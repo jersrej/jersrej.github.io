@@ -30,14 +30,14 @@ export const ProjectSlide = ({ project, position, total }: ProjectSlideProps) =>
             <span className="mx-2">·</span>
             {role}
             {project.featured && (
-              <span className="text-accent deck:max-md:hidden">
+              <span className="text-accent-2 deck:max-md:hidden">
                 <span className="mx-2 text-muted">·</span>
                 Featured
               </span>
             )}
           </p>
 
-          <h2 className="mt-3 font-display text-[clamp(2rem,min(6vw,10vh),4.5rem)] leading-none font-semibold tracking-tight short:mt-1.5 short:text-3xl">
+          <h2 className="display mt-3 text-[clamp(2.25rem,min(7vw,11vh),5.5rem)] short:mt-1.5 short:text-3xl">
             {name}
           </h2>
 
@@ -70,7 +70,7 @@ export const ProjectSlide = ({ project, position, total }: ProjectSlideProps) =>
           <ul className="mt-2 space-y-1.5 text-sm">
             {project.contributions.slice(0, 3).map((item) => (
               <li key={item} className="flex gap-2">
-                <span className="mt-2 size-1 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+                <span className="mark mt-[0.45rem] size-1" aria-hidden="true" />
                 {item}
               </li>
             ))}
@@ -83,7 +83,7 @@ export const ProjectSlide = ({ project, position, total }: ProjectSlideProps) =>
           {project.stack.split(' · ').map((tech) => (
             <li
               key={tech}
-              className="rounded-sm border border-line bg-surface px-2 py-1 font-mono text-xs"
+              className="rounded-sm border border-line bg-surface px-2 py-1 font-mono text-[11px]"
             >
               {tech}
             </li>

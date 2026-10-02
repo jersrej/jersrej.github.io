@@ -15,7 +15,7 @@ export const SectionNav = ({ current, label, className = '' }: SectionNavProps) 
           key={section.id}
           href={`#${section.id}`}
           aria-current={active ? 'true' : undefined}
-          className={`border-b-2 px-1.5 py-2.5 font-mono text-[11px] uppercase transition-colors md:px-3 md:text-xs md:tracking-wide ${
+          className={`border-b-2 px-1.5 py-2.5 font-mono text-[10px] tracking-wide uppercase transition-colors md:px-3 md:text-[11px] ${
             active ? 'border-accent text-ink' : 'border-transparent text-muted hover:text-ink'
           }`}
         >

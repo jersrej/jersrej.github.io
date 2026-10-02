@@ -25,10 +25,18 @@
   }
 }
 
+/*
+ * Design tokens. Components only use these names (bg-paper, text-ink, …);
+ * the values live in :root / :root.dark below.
+ */
 @theme inline {
-  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
-  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* One family, three voices: condensed for display, normal for text, a wide mono for labels and data */
+  --font-display: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display--font-variation-settings: 'wdth' 78;
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans--font-variation-settings: 'wdth' 100;
+  --font-mono: 'Martian Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-mono--font-variation-settings: 'wdth' 87.5;
 
   --color-paper: var(--paper);
   --color-surface: var(--surface);
@@ -36,26 +44,52 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
 }
 
+/*
+ * Graphite and signal: cool grey neutrals with one orange.
+ *   paper / surface  page background / raised panels (dialogs, chips)
+ *   ink / muted      primary text / secondary text and metadata
+ *   line             borders and dividers
+ *   accent           "current or interactive": active nav, focus, hover, the logo dot
+ *   accent-2         "worth noticing" information that is not interactive
+ */
 :root {
   color-scheme: light;
-  --paper: #f5f6f8;
-  --surface: #ffffff;
-  --ink: #12161d;
-  --muted: #586172;
-  --line: #dfe3ea;
-  --accent: #2a4fd7;
+  --paper: #eceeed;
+  --surface: #f8f9f8;
+  --ink: #161a1c;
+  --muted: #566065;
+  --line: #d2d7d6;
+  --accent: #b83a0a;
+  --accent-2: #1f6876;
 }
 
 :root.dark {
   color-scheme: dark;
-  --paper: #0d1117;
-  --surface: #141a22;
-  --ink: #e9edf3;
-  --muted: #8d98a9;
-  --line: #232c38;
-  --accent: #8aa6ff;
+  --paper: #121517;
+  --surface: #1a1e21;
+  --ink: #e8eceb;
+  --muted: #949da0;
+  --line: #2a3034;
+  --accent: #ff7a33;
+  --accent-2: #7cc0cc;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/*
+ * Theme switch: the browser crossfades the whole page between the two themes
+ * (see useTheme). Skipped entirely when reduced motion is requested.
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 240ms;
+  animation-timing-function: ease;
 }
 
 html,
@@ -127,8 +161,22 @@ body {
     @apply py-16 md:py-24;
   }
 
+  /* Display: the expressive voice, for the name, project titles and the email */
+  .display {
+    @apply font-display font-semibold;
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+  }
+
+  /* Label: section names, metadata and anything that reads as data */
   .eyebrow {
-    @apply font-mono text-xs tracking-wide text-muted uppercase;
+    @apply font-mono text-[11px] font-normal text-muted uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* The square from the logo, reused as the marker for status and list items */
+  .mark {
+    @apply inline-block size-1.5 shrink-0 bg-muted;
   }
 
   .btn {
@@ -140,7 +188,7 @@ body {
   }
 
   .kbd {
-    @apply inline-flex h-5 min-w-5 items-center justify-center rounded-sm border border-line bg-paper px-1 font-mono text-[11px] leading-none text-muted;
+    @apply inline-flex h-5 min-w-5 items-center justify-center rounded-sm border border-line bg-paper px-1 font-mono text-[10px] leading-none text-muted;
   }
 
   .text-link {
@@ -199,6 +247,16 @@ body {
   animation: loader-in 150ms ease-out 200ms forwards;
 }
 
+/*
+ * The app renders underneath while its fonts load. Keeping it unpainted until
+ * the loader starts to leave means the font swap never shows or shifts layout.
+ */
+.js:has(#loader:not(.is-leaving)) #root,
+.js:has(#loader:not(.is-leaving)) #root * {
+  /* The active slide sets visibility itself, so this has to win over it */
+  visibility: hidden !important;
+}
+
 .js #loader.is-leaving {
   animation: loader-out 200ms ease-in forwards;
 }
@@ -207,6 +265,20 @@ body {
   width: 40px;
   height: 40px;
   margin: 0 auto 16px;
+}
+
+#loader .mark-bg {
+  fill: var(--ink);
+}
+
+#loader .mark-j {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 4;
+}
+
+#loader .mark-dot {
+  fill: var(--accent);
 }
 
 #loader .loader-muted {

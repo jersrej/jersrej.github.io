@@ -14,6 +14,7 @@ import { links } from '../data/links';
 import type { Theme } from '../hooks/useTheme';
 import type { ViewMode } from '../hooks/useViewMode';
 import { IconButton } from './IconButton';
+import { Logo } from './Logo';
 import { SectionNav } from './SectionNav';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -52,9 +53,10 @@ export const Header = ({
       <div className="mx-auto flex min-h-14 max-w-6xl flex-wrap items-center justify-between gap-x-2 px-5 md:gap-x-4 md:px-10 short:min-h-11">
         <a
           href="#intro"
-          className="font-display text-base font-semibold tracking-tight whitespace-nowrap"
+          aria-label="Jerson Conmigo — back to the introduction"
+          className="group -m-1 rounded-md p-1"
         >
-          Jerson Conmigo
+          <Logo />
         </a>
 
         {/* Small screens: the deck keeps this nav in its bottom bar; the long page gives it a row */}
@@ -108,7 +110,7 @@ export const Header = ({
           >
             {isDeck ? <ScrollText className="size-4" /> : <GalleryHorizontal className="size-4" />}
           </IconButton>
-          <ThemeToggle theme={theme} onCycle={onThemeCycle} className="max-sm:hidden" />
+          <ThemeToggle theme={theme} onCycle={onThemeCycle} />
           <IconButton label="Command menu" onClick={onOpenPalette}>
             <Command className="size-4 max-sm:hidden" />
             <Ellipsis className="size-4 sm:hidden" />

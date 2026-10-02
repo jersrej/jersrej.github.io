@@ -15,7 +15,7 @@ export const AboutSection = () => {
       <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-center lg:gap-16 short:min-[560px]:grid-cols-[2fr_3fr] short:min-[560px]:gap-8 short:max-[559px]:gap-3">
         <div>
           <h2 className="eyebrow">About</h2>
-          <p className="mt-3 font-display text-lg leading-snug font-medium tracking-tight md:text-3xl short:text-base">
+          <p className="mt-3 text-lg leading-snug font-medium tracking-tight md:text-[1.75rem] md:leading-[1.25] short:text-base">
             Senior Frontend Engineer with {yearsOfExperience} years in the industry and{' '}
             {yearsWithReact}+ specializing in React, TypeScript, and modern JavaScript ecosystems.
           </p>
@@ -45,7 +45,7 @@ export const AboutSection = () => {
                       <span key={s.name}>
                         {s.name}
                         {s.since !== undefined && (
-                          <span className="ml-1 font-mono text-xs opacity-70 deck:max-md:hidden short:hidden">
+                          <span className="ml-1.5 font-mono text-[10px] opacity-80 deck:max-md:hidden short:hidden">
                             {formatYears(yearsSince(s.since, s.sinceMonth))}
                           </span>
                         )}
@@ -61,10 +61,7 @@ export const AboutSection = () => {
             <ul className="mt-3 grid gap-x-8 gap-y-2 border-t border-line pt-3 text-sm sm:grid-cols-2">
               {highlights.map((item) => (
                 <li key={item} className="flex gap-2">
-                  <span
-                    className="mt-2 size-1 shrink-0 rounded-full bg-accent"
-                    aria-hidden="true"
-                  />
+                  <span className="mark mt-[0.45rem] size-1" aria-hidden="true" />
                   {item}
                 </li>
               ))}

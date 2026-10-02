@@ -14,7 +14,7 @@ export const ContactSection = () => {
 
       <a
         href={`mailto:${links.email}`}
-        className="mt-8 self-start font-display text-[clamp(1.25rem,min(5.4vw,11vh),3.75rem)] leading-tight font-semibold tracking-tight underline decoration-line decoration-2 underline-offset-8 transition-colors hover:text-accent hover:decoration-accent short:mt-4"
+        className="display mt-8 self-start text-[clamp(1.5rem,min(6.6vw,12vh),4.75rem)] leading-tight underline decoration-line decoration-2 underline-offset-8 transition-colors hover:text-accent hover:decoration-accent short:mt-4"
       >
         {links.email}
       </a>
@@ -48,7 +48,7 @@ export const ContactSection = () => {
         </a>
       </div>
 
-      <p className="mt-10 flex flex-wrap gap-x-4 gap-y-1 border-t border-line pt-4 font-mono text-xs text-muted short:hidden">
+      <p className="mt-10 flex flex-wrap gap-x-4 gap-y-1 border-t border-line pt-4 font-mono text-[11px] text-muted short:hidden">
         <span>© {new Date().getFullYear()} Jerson Q. Conmigo</span>
         <a href="#intro" className="text-link">
           Back to start

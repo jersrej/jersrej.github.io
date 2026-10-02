@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react';
+import { flushSync } from 'react-dom';
 
 export type Theme = 'light' | 'dark' | 'system';
 
 const themeOrder: Theme[] = ['light', 'dark', 'system'];
+
+const systemDark = () => window.matchMedia('(prefers-color-scheme: dark)');
+const isDark = (theme: Theme) => theme === 'dark' || (theme === 'system' && systemDark().matches);
+const applyTheme = (theme: Theme) =>
+  document.documentElement.classList.toggle('dark', isDark(theme));
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
@@ -10,41 +16,39 @@ export function useTheme() {
     return stored || 'system';
   });
 
-  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('dark');
-
+  // Keep the page in step with the OS while following the system theme
   useEffect(() => {
-    const root = document.documentElement;
+    applyTheme(theme);
+    if (theme !== 'system') return;
 
-    const applyTheme = (isDark: boolean) => {
-      if (isDark) {
-        root.classList.add('dark');
-        setResolvedTheme('dark');
-      } else {
-        root.classList.remove('dark');
-        setResolvedTheme('light');
-      }
-    };
-
-    if (theme === 'system') {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      applyTheme(mediaQuery.matches);
-
-      const listener = (e: MediaQueryListEvent) => applyTheme(e.matches);
-      mediaQuery.addEventListener('change', listener);
-      return () => mediaQuery.removeEventListener('change', listener);
-    } else {
-      applyTheme(theme === 'dark');
-    }
+    const mediaQuery = systemDark();
+    const listener = () => applyTheme('system');
+    mediaQuery.addEventListener('change', listener);
+    return () => mediaQuery.removeEventListener('change', listener);
   }, [theme]);
 
   const setThemeMode = (newTheme: Theme) => {
-    setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
+
+    // Everything that changes with the theme must happen inside this one step
+    const update = () => {
+      applyTheme(newTheme);
+      flushSync(() => setTheme(newTheme));
+    };
+
+    // Crossfade the whole page between themes where the browser can; with
+    // reduced motion (or no support) the change is immediate
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if ('startViewTransition' in document && !reducedMotion) {
+      document.startViewTransition(update);
+    } else {
+      update();
+    }
   };
 
   const cycleTheme = () => {
     setThemeMode(themeOrder[(themeOrder.indexOf(theme) + 1) % themeOrder.length]);
   };
 
-  return { theme, resolvedTheme, setTheme: setThemeMode, cycleTheme };
+  return { theme, setTheme: setThemeMode, cycleTheme };
 }

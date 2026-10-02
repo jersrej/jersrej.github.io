@@ -16,12 +16,14 @@ export const HeroSection = () => {
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-end lg:gap-16">
         <div>
           <p className="eyebrow flex items-center gap-2">
-            <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" />
+            <span className="mark bg-accent" aria-hidden="true" />
             Available for new opportunities
           </p>
 
-          <h1 className="mt-4 font-display text-[clamp(2.5rem,min(7.5vw,13vh),5.5rem)] leading-[0.95] font-semibold tracking-tight short:mt-2">
+          <h1 className="display mt-4 text-[clamp(2.75rem,min(9vw,15vh),5.75rem)] lg:text-[clamp(2.75rem,min(6.2vw,15vh),5.75rem)] short:mt-2">
             Jerson Q. Conmigo
+            {/* The logo's square dot closes the name */}
+            <span className="ml-[0.05em] inline-block size-[0.15em] bg-accent" aria-hidden="true" />
           </h1>
 
           <p className="mt-3 text-lg text-muted md:text-2xl">

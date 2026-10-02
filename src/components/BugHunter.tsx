@@ -168,7 +168,7 @@ const Game = ({ onClose, sound }: Omit<BugHunterProps, 'open'>) => {
         </button>
       </div>
 
-      <p className="mt-3 flex gap-5 font-mono text-xs text-muted">
+      <p className="eyebrow mt-3 flex gap-5">
         <span>
           Score <span className="text-ink">{score}</span>
         </span>
@@ -200,14 +200,14 @@ const Game = ({ onClose, sound }: Omit<BugHunterProps, 'open'>) => {
               className="absolute flex size-14 flex-col items-center justify-center gap-0.5 rounded-md border border-line bg-surface transition-colors hover:border-accent"
             >
               <BugIcon className="size-5" aria-hidden="true" />
-              <span className="font-mono text-[11px] leading-none text-muted" aria-hidden="true">
+              <span className="font-mono text-[10px] leading-none text-muted" aria-hidden="true">
                 {bug.key}
               </span>
               {/* Time left before this bug ships */}
               <span
                 aria-hidden="true"
                 style={{ animationDuration: `${bug.ttl}ms` }}
-                className="bug-timer absolute inset-x-1.5 bottom-1 h-0.5 origin-left rounded-full bg-accent"
+                className="bug-timer absolute inset-x-1.5 bottom-1 h-0.5 origin-left bg-accent"
               />
             </button>
           ))
@@ -217,9 +217,9 @@ const Game = ({ onClose, sound }: Omit<BugHunterProps, 'open'>) => {
             className="flex h-full flex-col items-center justify-center gap-4 px-6 text-center"
           >
             {phase === 'over' ? (
-              <p className="font-display text-2xl font-semibold tracking-tight">
+              <p className="display text-4xl">
                 {score} {score === 1 ? 'bug' : 'bugs'} squashed
-                <span className="mt-1 block font-sans text-sm font-normal text-muted">
+                <span className="mt-2 block font-sans text-sm leading-normal font-normal tracking-normal text-muted">
                   {score > 0 && score >= best
                     ? 'A new best. Three still made it to production.'
                     : 'Three made it to production.'}

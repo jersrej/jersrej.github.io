@@ -20,7 +20,7 @@ export const DeckControls = ({ index, onStep, onOpenShortcuts }: DeckControlsPro
   return (
     <footer>
       {/* Progress: one tick per slide, grouped by section */}
-      <div className="flex gap-2" aria-hidden="true">
+      <div className="flex h-1 items-end gap-2" aria-hidden="true">
         {sections.map((section) => (
           <div
             key={section.id}
@@ -32,8 +32,8 @@ export const DeckControls = ({ index, onStep, onOpenShortcuts }: DeckControlsPro
                 s.section === section.id && (
                   <span
                     key={s.hash}
-                    className={`h-0.5 flex-1 transition-colors duration-300 ${
-                      i === index ? 'bg-accent' : i < index ? 'bg-muted' : 'bg-line'
+                    className={`flex-1 transition-[height,background-color] duration-300 motion-reduce:transition-none ${
+                      i === index ? 'h-1 bg-accent' : i < index ? 'h-0.5 bg-muted' : 'h-0.5 bg-line'
                     }`}
                   />
                 )
@@ -56,7 +56,7 @@ export const DeckControls = ({ index, onStep, onOpenShortcuts }: DeckControlsPro
 
         <SectionNav current={current.section} label="Section navigation" className="md:hidden" />
 
-        <p className="order-first mr-auto hidden items-center gap-3 font-mono text-xs md:flex">
+        <p className="order-first mr-auto hidden items-center gap-3 font-mono text-[11px] md:flex">
           <span>
             {pad(index + 1)} <span className="text-muted">/ {pad(steps.length)}</span>
           </span>
@@ -69,7 +69,7 @@ export const DeckControls = ({ index, onStep, onOpenShortcuts }: DeckControlsPro
         <button
           type="button"
           onClick={onOpenShortcuts}
-          className="mr-2 hidden h-9 items-center gap-1.5 rounded-md px-2 font-mono text-xs text-muted transition-colors hover:text-ink lg:flex"
+          className="mr-2 hidden h-9 items-center gap-1.5 rounded-md px-2 font-mono text-[11px] text-muted transition-colors hover:text-ink lg:flex"
         >
           <Keyboard className="size-4" aria-hidden="true" />
           Shortcuts
