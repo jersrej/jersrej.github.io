@@ -1,12 +1,13 @@
 import { useTheme } from '../hooks/useTheme';
+import { MonitorIcon, MoonIcon, SunIcon } from './Icons';
 
 export const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
 
   const themes = [
-    { value: 'light' as const, label: 'Light', icon: '☀️' },
-    { value: 'dark' as const, label: 'Dark', icon: '🌙' },
-    { value: 'system' as const, label: 'System', icon: '💻' }
+    { value: 'light' as const, label: 'Light', icon: <SunIcon /> },
+    { value: 'dark' as const, label: 'Dark', icon: <MoonIcon /> },
+    { value: 'system' as const, label: 'System', icon: <MonitorIcon /> }
   ];
 
   const currentIndex = themes.findIndex((t) => t.value === theme);
@@ -20,13 +21,11 @@ export const ThemeToggle = () => {
   return (
     <button
       onClick={cycleTheme}
-      className="group relative flex items-center justify-center size-9 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 border border-gray-300 dark:border-white/10 hover:border-cyan-400/30 transition-all duration-300"
+      className="flex size-9 items-center justify-center rounded-md border border-line text-muted transition-colors hover:border-ink hover:text-ink"
       aria-label={`Current theme: ${currentTheme.label}. Click to cycle.`}
       title={`Theme: ${currentTheme.label}`}
     >
-      <span className="text-lg transition-transform group-hover:scale-110">
-        {currentTheme.icon}
-      </span>
+      {currentTheme.icon}
     </button>
   );
 };

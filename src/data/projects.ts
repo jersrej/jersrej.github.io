@@ -176,3 +176,9 @@ export const projects: Project[] = [
     link: 'https://www.xpogroup.com/'
   }
 ];
+
+// Titles are written as "Client – Role"
+export const splitTitle = (title: string) => {
+  const [name, role = ''] = title.split(' – ');
+  return { name, role };
+};

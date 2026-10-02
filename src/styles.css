@@ -1,6 +1,42 @@
 @import 'tailwindcss';
 
-@variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where(.dark, .dark *));
+/* Landscape phones and very small portrait phones */
+@custom-variant short (@media (max-height: 520px));
+@custom-variant tiny (@media (max-height: 350px));
+
+@theme inline {
+  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+}
+
+:root {
+  color-scheme: light;
+  --paper: #f5f6f8;
+  --surface: #ffffff;
+  --ink: #12161d;
+  --muted: #586172;
+  --line: #dfe3ea;
+  --accent: #2a4fd7;
+}
+
+:root.dark {
+  color-scheme: dark;
+  --paper: #0d1117;
+  --surface: #141a22;
+  --ink: #e9edf3;
+  --muted: #8d98a9;
+  --line: #232c38;
+  --accent: #8aa6ff;
+}
 
 html,
 body,
@@ -10,19 +46,60 @@ body,
   padding: 0;
 }
 
+/* The site is a fixed-viewport deck: the document itself never scrolls. */
+html,
 body {
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(249 250 251);
-  color: rgb(17 24 39);
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
-body.dark {
-  background-color: rgb(15 23 42);
-  color: rgb(241 245 249);
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@layer components {
+  .slide {
+    @apply mx-auto flex h-full w-full max-w-6xl flex-col justify-center px-5 py-5 md:px-10 md:py-8 short:py-2;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs tracking-wide text-muted uppercase;
+  }
+
+  .btn {
+    @apply inline-flex h-11 items-center gap-2 rounded-md border border-line px-4 text-sm font-medium whitespace-nowrap transition-colors hover:border-ink short:h-9;
+  }
+
+  .btn-primary {
+    @apply border-ink bg-ink text-paper hover:border-accent hover:bg-accent;
+  }
+
+  .text-link {
+    @apply inline-flex items-center gap-1 underline decoration-line underline-offset-4 transition-colors hover:text-accent hover:decoration-accent;
+  }
+
+  /*
+   * Secondary slide content. It is dropped, not scrolled, when the viewport
+   * cannot fit it: shown on tablet/desktop sizes and on tall phones only.
+   */
+  .roomy {
+    display: none;
+  }
+
+  @media (min-width: 768px) and (min-height: 521px), (min-width: 375px) and (min-height: 780px) {
+    .roomy {
+      display: block;
+    }
+  }
 }
 
 /* Confetti fall animation for easter egg */
@@ -39,12 +116,4 @@ body.dark {
 
 .animate-fall {
   animation: fall linear forwards;
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
