@@ -1,31 +1,25 @@
-import { useTheme } from '../hooks/useTheme';
-import { MonitorIcon, MoonIcon, SunIcon } from './Icons';
+import { Monitor, Moon, Sun } from 'lucide-react';
+import type { Theme } from '../hooks/useTheme';
+import { IconButton } from './IconButton';
 
-export const ThemeToggle = () => {
-  const { theme, setTheme } = useTheme();
+interface ThemeToggleProps {
+  theme: Theme;
+  onCycle: () => void;
+  className?: string;
+}
 
-  const themes = [
-    { value: 'light' as const, label: 'Light', icon: <SunIcon /> },
-    { value: 'dark' as const, label: 'Dark', icon: <MoonIcon /> },
-    { value: 'system' as const, label: 'System', icon: <MonitorIcon /> }
-  ];
+const themes = {
+  light: { label: 'Light', Icon: Sun },
+  dark: { label: 'Dark', Icon: Moon },
+  system: { label: 'System', Icon: Monitor }
+};
 
-  const currentIndex = themes.findIndex((t) => t.value === theme);
-  const currentTheme = themes[currentIndex] || themes[2];
-
-  const cycleTheme = () => {
-    const nextIndex = (currentIndex + 1) % themes.length;
-    setTheme(themes[nextIndex].value);
-  };
+export const ThemeToggle = ({ theme, onCycle, className }: ThemeToggleProps) => {
+  const { label, Icon } = themes[theme] ?? themes.system;
 
   return (
-    <button
-      onClick={cycleTheme}
-      className="flex size-9 items-center justify-center rounded-md border border-line text-muted transition-colors hover:border-ink hover:text-ink"
-      aria-label={`Current theme: ${currentTheme.label}. Click to cycle.`}
-      title={`Theme: ${currentTheme.label}`}
-    >
-      {currentTheme.icon}
-    </button>
+    <IconButton label={`Theme: ${label}`} onClick={onCycle} className={className}>
+      <Icon className="size-4" />
+    </IconButton>
   );
 };

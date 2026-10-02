@@ -1,5 +1,6 @@
 import { splitTitle, type Project } from '../data/projects';
-import { ArrowUpRightIcon } from './Icons';
+import { ArrowUpRight } from 'lucide-react';
+import { GitHubIcon } from './BrandIcons';
 
 interface ProjectSlideProps {
   project: Project;
@@ -14,20 +15,48 @@ export const ProjectSlide = ({ project, position, total }: ProjectSlideProps) =>
 
   return (
     <div className="flex h-full flex-col justify-center">
-      <p className="eyebrow">
-        <span className="text-ink">{String(position).padStart(2, '0')}</span> /{' '}
-        {String(total).padStart(2, '0')}
-        <span className="mx-2">·</span>
-        {role}
-      </p>
+      {/* With a screenshot the title block shares its row; without one it is unchanged */}
+      <div
+        className={
+          project.screenshot
+            ? 'grid gap-6 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-end lg:gap-10'
+            : ''
+        }
+      >
+        <div>
+          <p className="eyebrow">
+            <span className="text-ink">{String(position).padStart(2, '0')}</span> /{' '}
+            {String(total).padStart(2, '0')}
+            <span className="mx-2">·</span>
+            {role}
+            {project.featured && (
+              <span className="text-accent deck:max-md:hidden">
+                <span className="mx-2 text-muted">·</span>
+                Featured
+              </span>
+            )}
+          </p>
 
-      <h2 className="mt-3 font-display text-[clamp(2rem,min(6vw,10vh),4.5rem)] leading-none font-semibold tracking-tight short:mt-1.5 short:text-3xl">
-        {name}
-      </h2>
+          <h2 className="mt-3 font-display text-[clamp(2rem,min(6vw,10vh),4.5rem)] leading-none font-semibold tracking-tight short:mt-1.5 short:text-3xl">
+            {name}
+          </h2>
 
-      <p className="mt-3 max-w-2xl text-lg leading-snug md:text-xl short:mt-2 short:text-base">
-        {project.tagline}
-      </p>
+          <p className="mt-3 max-w-2xl text-lg leading-snug md:text-xl short:mt-2 short:text-base">
+            {project.tagline}
+          </p>
+        </div>
+        {project.screenshot && (
+          <img
+            src={project.screenshot.src}
+            alt={project.screenshot.alt}
+            width={640}
+            height={400}
+            loading="lazy"
+            decoding="async"
+            className="aspect-16/10 w-full rounded-md border border-line object-cover deck:max-lg:hidden"
+          />
+        )}
+      </div>
 
       <div className="mt-6 grid gap-x-12 border-t border-line pt-5 md:grid-cols-2 short:mt-3 short:pt-3 tiny:hidden">
         <div className="short:md:col-span-2">
@@ -66,10 +95,23 @@ export const ProjectSlide = ({ project, position, total }: ProjectSlideProps) =>
             target="_blank"
             rel="noopener noreferrer"
             className="text-link text-sm font-medium"
-            aria-label={`Visit ${name} website`}
+            aria-label={`Visit ${name} website (opens in a new tab)`}
           >
-            {hostname(project.link)}
-            <ArrowUpRightIcon />
+            Visit {hostname(project.link)}
+            <ArrowUpRight className="size-3.5" aria-hidden="true" />
+          </a>
+        )}
+        {project.repo && (
+          <a
+            href={project.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-link text-sm font-medium"
+            aria-label={`${name} source code on GitHub (opens in a new tab)`}
+          >
+            <GitHubIcon className="size-3.5" />
+            Source
+            <ArrowUpRight className="size-3.5" aria-hidden="true" />
           </a>
         )}
       </div>

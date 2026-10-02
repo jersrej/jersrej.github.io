@@ -6,6 +6,10 @@ export type Project = {
   contributions: string[];
   impact: string;
   link?: string;
+  /** Public source repository, when there is one */
+  repo?: string;
+  /** Image in /public, e.g. { src: '/projects/polln.webp', alt: 'Polln patient dashboard' } */
+  screenshot?: { src: string; alt: string };
   featured: boolean;
 };
 

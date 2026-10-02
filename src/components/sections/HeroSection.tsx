@@ -1,3 +1,5 @@
+import { ArrowRight, ArrowUpRight, Download } from 'lucide-react';
+import { links } from '../../data/links';
 import { splitTitle } from '../../data/projects';
 import {
   featured,
@@ -6,7 +8,7 @@ import {
   yearsOfExperience,
   yearsWithReact
 } from '../../utils/constants';
-import { ArrowRightIcon, ArrowUpRightIcon, DownloadIcon } from '../Icons';
+import { GitHubIcon, LinkedInIcon } from '../BrandIcons';
 
 export const HeroSection = () => {
   return (
@@ -34,36 +36,38 @@ export const HeroSection = () => {
           <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-4 short:mt-4">
             <a href="#work" className="btn btn-primary">
               View work
-              <ArrowRightIcon />
+              <ArrowRight className="size-4" aria-hidden="true" />
             </a>
             <a
-              href="/Jerson-Conmigo-CV.pdf"
+              href={links.cv}
               target="_blank"
               rel="noopener noreferrer"
               className="btn"
               aria-label="Download Jerson Conmigo's CV (PDF)"
             >
-              <DownloadIcon />
+              <Download className="size-4" aria-hidden="true" />
               Download CV
             </a>
             <span className="flex gap-5 text-sm sm:ml-3">
               <a
-                href="https://github.com/jersrej"
+                href={links.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-link"
               >
+                <GitHubIcon />
                 GitHub
-                <ArrowUpRightIcon />
+                <ArrowUpRight className="size-3.5 text-muted" aria-hidden="true" />
               </a>
               <a
-                href="https://linkedin.com/in/jerson-conmigo"
+                href={links.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-link"
               >
+                <LinkedInIcon />
                 LinkedIn
-                <ArrowUpRightIcon />
+                <ArrowUpRight className="size-3.5 text-muted" aria-hidden="true" />
               </a>
             </span>
           </div>

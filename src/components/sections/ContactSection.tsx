@@ -1,4 +1,7 @@
-import { ArrowUpRightIcon, DownloadIcon } from '../Icons';
+import { ArrowUpRight, Download, Mail } from 'lucide-react';
+import { links } from '../../data/links';
+import { GitHubIcon, LinkedInIcon } from '../BrandIcons';
+import { CopyButton } from '../CopyButton';
 
 export const ContactSection = () => {
   return (
@@ -10,46 +13,38 @@ export const ContactSection = () => {
       </p>
 
       <a
-        href="mailto:jerson.conmigo@gmail.com"
+        href={`mailto:${links.email}`}
         className="mt-8 self-start font-display text-[clamp(1.25rem,min(5.4vw,11vh),3.75rem)] leading-tight font-semibold tracking-tight underline decoration-line decoration-2 underline-offset-8 transition-colors hover:text-accent hover:decoration-accent short:mt-4"
       >
-        jerson.conmigo@gmail.com
+        {links.email}
       </a>
 
-      <p className="mt-4 text-sm text-muted short:mt-2">
-        or{' '}
-        <a href="mailto:jconmigo@yahoo.com" className="text-link text-ink">
-          jconmigo@yahoo.com
+      <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted short:mt-2">
+        <CopyButton text={links.email} label="Copy email" />
+        <span className="mx-1" aria-hidden="true">
+          ·
+        </span>
+        <Mail className="size-3.5" aria-hidden="true" />
+        or
+        <a href={`mailto:${links.emailAlt}`} className="text-link text-ink">
+          {links.emailAlt}
         </a>
       </p>
 
       <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-4 short:mt-4">
-        <a
-          href="/Jerson-Conmigo-CV.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-primary"
-        >
-          <DownloadIcon />
+        <a href={links.cv} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+          <Download className="size-4" aria-hidden="true" />
           Download CV
         </a>
-        <a
-          href="https://linkedin.com/in/jerson-conmigo"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn"
-        >
+        <a href={links.linkedin} target="_blank" rel="noopener noreferrer" className="btn">
+          <LinkedInIcon />
           LinkedIn
-          <ArrowUpRightIcon />
+          <ArrowUpRight className="size-3.5 text-muted" aria-hidden="true" />
         </a>
-        <a
-          href="https://github.com/jersrej"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn"
-        >
+        <a href={links.github} target="_blank" rel="noopener noreferrer" className="btn">
+          <GitHubIcon />
           GitHub
-          <ArrowUpRightIcon />
+          <ArrowUpRight className="size-3.5 text-muted" aria-hidden="true" />
         </a>
       </div>
 

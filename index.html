@@ -2,46 +2,68 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary Meta Tags -->
     <title>Jerson Q. Conmigo — Senior Frontend Engineer | React & TypeScript Specialist</title>
     <meta
-      name="title"
-      content="Jerson Q. Conmigo — Senior Frontend Engineer | React & TypeScript Specialist"
-    />
-    <meta
       name="description"
-      content="Senior Frontend Engineer with 15+ years of experience specializing in React, TypeScript, and modern web technologies. Building scalable, maintainable enterprise applications."
-    />
-    <meta
-      name="keywords"
-      content="Frontend Engineer, React Developer, TypeScript, JavaScript, Web Developer, Senior Software Engineer, UI/UX, GraphQL"
+      content="Senior Frontend Engineer specializing in React and TypeScript. I architect and deliver enterprise-scale frontend systems with a strong emphasis on reliability, maintainability, and long-term product stability."
     />
     <meta name="author" content="Jerson Q. Conmigo" />
+    <link rel="canonical" href="https://jersrej.github.io/" />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f5f6f8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Jerson Q. Conmigo" />
     <meta property="og:url" content="https://jersrej.github.io/" />
     <meta property="og:title" content="Jerson Q. Conmigo — Senior Frontend Engineer" />
     <meta
       property="og:description"
-      content="Senior Frontend Engineer with 15+ years of experience specializing in React, TypeScript, and modern web technologies."
+      content="Senior Frontend Engineer specializing in React and TypeScript, building enterprise-scale frontend systems."
     />
-    <meta property="og:image" content="https://jersrej.github.io/og-image.jpg" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://jersrej.github.io/" />
-    <meta property="twitter:title" content="Jerson Q. Conmigo — Senior Frontend Engineer" />
+    <meta property="og:image" content="https://jersrej.github.io/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta
-      property="twitter:description"
-      content="Senior Frontend Engineer with 15+ years of experience specializing in React, TypeScript, and modern web technologies."
+      property="og:image:alt"
+      content="Jerson Q. Conmigo — Senior Frontend Engineer, React and TypeScript"
     />
-    <meta property="twitter:image" content="https://jersrej.github.io/og-image.jpg" />
 
-    <!-- Performance & Preload -->
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Jerson Q. Conmigo — Senior Frontend Engineer" />
+    <meta
+      name="twitter:description"
+      content="Senior Frontend Engineer specializing in React and TypeScript, building enterprise-scale frontend systems."
+    />
+    <meta name="twitter:image" content="https://jersrej.github.io/og-image.png" />
+    <meta
+      name="twitter:image:alt"
+      content="Jerson Q. Conmigo — Senior Frontend Engineer, React and TypeScript"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Jerson Q. Conmigo",
+        "jobTitle": "Senior Frontend Engineer",
+        "url": "https://jersrej.github.io/",
+        "sameAs": ["https://github.com/jersrej", "https://linkedin.com/in/jerson-conmigo"]
+      }
+    </script>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -49,7 +71,7 @@
       rel="stylesheet"
     />
 
-    <!-- Apply the saved theme before first paint to avoid a flash -->
+    <!-- Apply the saved theme and view mode before first paint to avoid a flash -->
     <script>
       (function () {
         try {
@@ -57,7 +79,10 @@
           var dark =
             theme === 'dark' ||
             (theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.add('js');
           if (dark) document.documentElement.classList.add('dark');
+          document.documentElement.dataset.mode =
+            localStorage.getItem('view-mode') === 'page' ? 'page' : 'deck';
         } catch (e) {}
       })();
     </script>
@@ -66,6 +91,31 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!--
+      Loading screen: plain HTML so it can paint before the app's JavaScript
+      arrives. Styled in src/styles.css, removed by src/utils/loader.ts.
+    -->
+    <div id="loader" role="status">
+      <div>
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="7" fill="#12161d" />
+          <path
+            d="M18.5 7.5v11a4.75 4.75 0 0 1-9.5 0"
+            fill="none"
+            stroke="#f5f6f8"
+            stroke-width="4"
+          />
+          <rect x="22" y="19.25" width="4.5" height="4.5" fill="#8aa6ff" />
+        </svg>
+        <p>Jerson Conmigo</p>
+        <p class="loader-muted">Frontend Engineer</p>
+        <div class="loader-bar" aria-hidden="true"><span></span></div>
+        <p class="loader-muted loader-status">Initializing…</p>
+      </div>
+    </div>
+
+    <noscript>This portfolio needs JavaScript to run.</noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

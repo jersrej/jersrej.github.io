@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 
-type Theme = 'light' | 'dark' | 'system';
+export type Theme = 'light' | 'dark' | 'system';
+
+const themeOrder: Theme[] = ['light', 'dark', 'system'];
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
@@ -40,5 +42,9 @@ export function useTheme() {
     localStorage.setItem('theme', newTheme);
   };
 
-  return { theme, resolvedTheme, setTheme: setThemeMode };
+  const cycleTheme = () => {
+    setThemeMode(themeOrder[(themeOrder.indexOf(theme) + 1) % themeOrder.length]);
+  };
+
+  return { theme, resolvedTheme, setTheme: setThemeMode, cycleTheme };
 }

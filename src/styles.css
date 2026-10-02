@@ -1,9 +1,29 @@
 @import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
+/* Deck: fixed viewport, one slide at a time (default). Page: normal scrolling. */
+@custom-variant deck (&:where(:root:not([data-mode='page']) *));
+@custom-variant page (&:where([data-mode='page'] *));
+
+/*
+ * Height tiers for the deck, where content is dropped rather than scrolled.
+ * They never apply to the long page, which always shows everything.
+ */
 /* Landscape phones and very small portrait phones */
-@custom-variant short (@media (max-height: 520px));
-@custom-variant tiny (@media (max-height: 350px));
+@custom-variant short {
+  @media (max-height: 520px) {
+    &:where(:root:not([data-mode='page']) *) {
+      @slot;
+    }
+  }
+}
+@custom-variant tiny {
+  @media (max-height: 350px) {
+    &:where(:root:not([data-mode='page']) *) {
+      @slot;
+    }
+  }
+}
 
 @theme inline {
   --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
@@ -39,18 +59,36 @@
 }
 
 html,
-body,
-#root {
-  height: 100%;
+body {
   margin: 0;
   padding: 0;
 }
 
-/* The site is a fixed-viewport deck: the document itself never scrolls. */
-html,
-body {
+/* The deck is a fixed viewport: the document itself never scrolls. */
+:root:not([data-mode='page']),
+:root:not([data-mode='page']) body {
+  height: 100%;
   overflow: hidden;
   overscroll-behavior: none;
+}
+
+:root:not([data-mode='page']) #root {
+  height: 100%;
+}
+
+/* Long page: no scrolling behind an open dialog, and no jump when the scrollbar goes */
+[data-mode='page'] {
+  scrollbar-gutter: stable;
+}
+
+[data-mode='page']:has(dialog[open]) {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-mode='page'] {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -61,14 +99,32 @@ body {
   color: var(--ink);
 }
 
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+/* In the base layer so a component can opt out with a utility when it draws its own focus state */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 }
 
 @layer components {
+  /* Section container. A full-height centered slide in the deck, a padded block on the long page. */
   .slide {
-    @apply mx-auto flex h-full w-full max-w-6xl flex-col justify-center px-5 py-5 md:px-10 md:py-8 short:py-2;
+    @apply mx-auto flex w-full max-w-6xl flex-col px-5 md:px-10;
+  }
+
+  :root:not([data-mode='page']) .slide {
+    @apply h-full justify-center py-5 md:py-8;
+  }
+
+  @media (max-height: 520px) {
+    :root:not([data-mode='page']) .slide {
+      @apply py-2;
+    }
+  }
+
+  [data-mode='page'] .slide {
+    @apply py-16 md:py-24;
   }
 
   .eyebrow {
@@ -83,37 +139,125 @@ body {
     @apply border-ink bg-ink text-paper hover:border-accent hover:bg-accent;
   }
 
+  .kbd {
+    @apply inline-flex h-5 min-w-5 items-center justify-center rounded-sm border border-line bg-paper px-1 font-mono text-[11px] leading-none text-muted;
+  }
+
   .text-link {
     @apply inline-flex items-center gap-1 underline decoration-line underline-offset-4 transition-colors hover:text-accent hover:decoration-accent;
   }
 
   /*
-   * Secondary slide content. It is dropped, not scrolled, when the viewport
-   * cannot fit it: shown on tablet/desktop sizes and on tall phones only.
+   * Secondary slide content. In the deck it is dropped, not scrolled, when the
+   * viewport cannot fit it: shown on tablet/desktop sizes and on tall phones only.
    */
-  .roomy {
+  :root:not([data-mode='page']) .roomy {
     display: none;
   }
 
   @media (min-width: 768px) and (min-height: 521px), (min-width: 375px) and (min-height: 780px) {
-    .roomy {
+    :root:not([data-mode='page']) .roomy {
       display: block;
     }
   }
 }
 
-/* Confetti fall animation for easter egg */
-@keyframes fall {
-  0% {
-    transform: translateY(-100px) rotate(0deg);
+/* Bug Hunter: the bar under each bug drains over that bug's lifetime */
+@keyframes bug-timer {
+  to {
+    transform: scaleX(0);
+  }
+}
+
+.bug-timer {
+  animation: bug-timer linear forwards;
+}
+
+/*
+ * Loading screen (markup in index.html). It only fades in after 200ms, so a
+ * fast load never shows it; src/utils/loader.ts mirrors these timings.
+ * System fonts only: the web fonts are part of what it is waiting for.
+ */
+#loader {
+  display: none;
+}
+
+.js #loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: loader-in 150ms ease-out 200ms forwards;
+}
+
+.js #loader.is-leaving {
+  animation: loader-out 200ms ease-in forwards;
+}
+
+#loader svg {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 16px;
+}
+
+#loader .loader-muted {
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+#loader .loader-status {
+  margin-top: 12px;
+}
+
+#loader .loader-bar {
+  width: 120px;
+  height: 2px;
+  margin: 20px auto 0;
+  overflow: hidden;
+  background: var(--line);
+}
+
+#loader .loader-bar span {
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: var(--accent);
+  animation: loader-slide 1s ease-in-out infinite alternate;
+}
+
+@keyframes loader-in {
+  to {
     opacity: 1;
   }
-  100% {
-    transform: translateY(100vh) rotate(720deg);
+}
+
+@keyframes loader-out {
+  from {
+    opacity: 1;
+  }
+  to {
     opacity: 0;
   }
 }
 
-.animate-fall {
-  animation: fall linear forwards;
+@keyframes loader-slide {
+  to {
+    transform: translateX(150%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #loader .loader-bar span {
+    width: 100%;
+    animation: none;
+  }
 }

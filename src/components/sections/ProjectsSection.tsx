@@ -4,14 +4,24 @@ import { Slide } from '../Slide';
 
 interface ProjectsSectionProps {
   projects: Project[];
+  /** Highlighted in the index; in the deck, also the one project shown */
   activeIndex: number;
+  /** Long page: list every project instead of showing one at a time */
+  stacked?: boolean;
 }
 
-export const ProjectsSection = ({ projects, activeIndex }: ProjectsSectionProps) => {
+export const ProjectsSection = ({
+  projects,
+  activeIndex,
+  stacked = false
+}: ProjectsSectionProps) => {
   return (
-    <div className="mx-auto grid h-full max-w-6xl px-5 py-5 md:px-10 md:py-8 lg:grid-cols-[12rem_minmax(0,1fr)] lg:gap-16 short:py-2">
+    <div className="slide lg:grid lg:grid-cols-[12rem_minmax(0,1fr)] lg:gap-16">
       {/* Project index: stays put while the case study beside it changes */}
-      <nav aria-label="Projects" className="self-center max-lg:hidden short:hidden">
+      <nav
+        aria-label="Projects"
+        className="self-center max-lg:hidden short:hidden page:sticky page:top-24 page:self-start"
+      >
         <h2 className="eyebrow">Work</h2>
         <ol className="mt-4 border-l border-line">
           {projects.map((p, i) => {
@@ -35,13 +45,31 @@ export const ProjectsSection = ({ projects, activeIndex }: ProjectsSectionProps)
         </ol>
       </nav>
 
-      <div className="relative min-h-0">
-        {projects.map((p, i) => (
-          <Slide key={p.id} as="article" offset={i - activeIndex} label={`Project: ${p.title}`}>
-            <ProjectSlide project={p} position={i + 1} total={projects.length} />
-          </Slide>
-        ))}
-      </div>
+      {stacked ? (
+        <div>
+          <h2 className="eyebrow mb-10 lg:hidden">Work</h2>
+          <div className="divide-y divide-line">
+            {projects.map((p, i) => (
+              <article
+                key={p.id}
+                id={`work/${p.id}`}
+                aria-label={`Project: ${p.title}`}
+                className="scroll-mt-28 py-12 first:pt-0 last:pb-0 md:scroll-mt-24"
+              >
+                <ProjectSlide project={p} position={i + 1} total={projects.length} />
+              </article>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="relative min-h-0 max-lg:flex-1">
+          {projects.map((p, i) => (
+            <Slide key={p.id} as="article" offset={i - activeIndex} label={`Project: ${p.title}`}>
+              <ProjectSlide project={p} position={i + 1} total={projects.length} />
+            </Slide>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

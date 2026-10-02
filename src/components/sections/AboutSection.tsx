@@ -1,11 +1,6 @@
-import { getSkillsData } from '../../data/skillsData';
+import { skillGroups, skills } from '../../data/skills';
 import { yearsOfExperience, yearsWithReact } from '../../utils/constants';
-
-const skillGroups = [
-  { category: 'frontend', label: 'Frontend' },
-  { category: 'backend', label: 'Backend & APIs' },
-  { category: 'tools', label: 'Tools & workflow' }
-] as const;
+import { formatYears, yearsSince } from '../../utils/experience';
 
 const highlights = [
   'Led frontend architecture for multiple high-traffic applications',
@@ -14,14 +9,10 @@ const highlights = [
   'Mentored junior developers'
 ];
 
-const formatYears = (years: number) => (years < 1 ? '<1 yr' : `${years} yrs`);
-
 export const AboutSection = () => {
-  const skills = getSkillsData({ yearsOfExperience, yearsWithReact });
-
   return (
     <div className="slide">
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-center lg:gap-16 short:min-[560px]:grid-cols-[2fr_3fr] short:min-[560px]:gap-8">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-center lg:gap-16 short:min-[560px]:grid-cols-[2fr_3fr] short:min-[560px]:gap-8 short:max-[559px]:gap-3">
         <div>
           <h2 className="eyebrow">About</h2>
           <p className="mt-3 font-display text-lg leading-snug font-medium tracking-tight md:text-3xl short:text-base">
@@ -42,7 +33,10 @@ export const AboutSection = () => {
           <h3 className="eyebrow tiny:hidden">Core technologies</h3>
           <dl className="mt-3 space-y-3 border-t border-line pt-3 text-sm short:mt-2 short:space-y-1.5 short:pt-2 tiny:mt-0 tiny:border-0 tiny:pt-0">
             {skillGroups.map((group) => (
-              <div key={group.category} className="sm:grid sm:grid-cols-[8.5rem_minmax(0,1fr)] short:block">
+              <div
+                key={group.category}
+                className="sm:grid sm:grid-cols-[8.5rem_minmax(0,1fr)] short:block"
+              >
                 <dt className="font-medium">{group.label}</dt>
                 <dd className="flex flex-wrap gap-x-3 gap-y-0.5 text-muted max-sm:mt-0.5 short:mt-0.5">
                   {skills
@@ -50,8 +44,8 @@ export const AboutSection = () => {
                     .map((s) => (
                       <span key={s.name}>
                         {s.name}
-                        <span className="ml-1 font-mono text-xs opacity-70 max-md:hidden short:hidden">
-                          {formatYears(s.years)}
+                        <span className="ml-1 font-mono text-xs opacity-70 deck:max-md:hidden short:hidden">
+                          {formatYears(yearsSince(s.since))}
                         </span>
                       </span>
                     ))}
@@ -60,12 +54,15 @@ export const AboutSection = () => {
             ))}
           </dl>
 
-          <div className="mt-8 max-md:hidden short:hidden">
+          <div className="mt-8 deck:max-md:hidden short:hidden">
             <h3 className="eyebrow">Highlights</h3>
             <ul className="mt-3 grid gap-x-8 gap-y-2 border-t border-line pt-3 text-sm sm:grid-cols-2">
               {highlights.map((item) => (
                 <li key={item} className="flex gap-2">
-                  <span className="mt-2 size-1 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+                  <span
+                    className="mt-2 size-1 shrink-0 rounded-full bg-accent"
+                    aria-hidden="true"
+                  />
                   {item}
                 </li>
               ))}

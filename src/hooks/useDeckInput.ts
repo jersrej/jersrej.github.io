@@ -11,13 +11,16 @@ const WHEEL_QUIET_MS = 140;
 const SWIPE_DISTANCE = 48;
 const SWIPE_MAX_MS = 800;
 
+// The deck holds still behind the command palette and other dialogs
+const overlayOpen = () => document.querySelector('dialog[open]') !== null;
+
 /**
  * Keyboard, wheel/trackpad and touch navigation for the deck.
  */
 export function useDeckInput({ step, go, lastIndex }: DeckInputOptions) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey || overlayOpen()) return;
       const target = e.target as HTMLElement;
       if (target.closest('input, textarea, select, [contenteditable]')) return;
 
@@ -61,7 +64,7 @@ export function useDeckInput({ step, go, lastIndex }: DeckInputOptions) {
     let quietTimer: ReturnType<typeof setTimeout>;
 
     const handleWheel = (e: WheelEvent) => {
-      if (e.ctrlKey) return; // pinch-zoom
+      if (e.ctrlKey || overlayOpen()) return; // ctrl+wheel is pinch-zoom
 
       clearTimeout(quietTimer);
       quietTimer = setTimeout(() => {
@@ -88,7 +91,7 @@ export function useDeckInput({ step, go, lastIndex }: DeckInputOptions) {
     let start: { x: number; y: number; time: number } | null = null;
 
     const handleTouchStart = (e: TouchEvent) => {
-      if (e.touches.length !== 1) {
+      if (e.touches.length !== 1 || overlayOpen()) {
         start = null;
         return;
       }
