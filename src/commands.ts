@@ -5,12 +5,14 @@ import {
   FileText,
   FolderOpen,
   GalleryHorizontal,
+  Gamepad2,
   Hand,
   Keyboard,
   Mail,
   Pause,
   Play,
   ScrollText,
+  Sparkles,
   SunMoon,
   User,
   Volume2,
@@ -19,6 +21,8 @@ import {
 } from 'lucide-react';
 import { GitHubIcon, LinkedInIcon } from './components/BrandIcons';
 import { links } from './data/links';
+import { splitTitle } from './data/projects';
+import { sideQuests } from './data/sideQuests';
 import type { Theme } from './hooks/useTheme';
 import type { ViewMode } from './hooks/useViewMode';
 
@@ -81,6 +85,14 @@ export const buildCommands = (ctx: CommandContext): Command[] => {
       keywords: 'work case studies',
       icon: FolderOpen,
       run: goTo('work')
+    },
+    {
+      id: 'quests',
+      group: 'Go to',
+      label: 'Side quests',
+      keywords: 'personal projects fun cool stuff playground',
+      icon: Sparkles,
+      run: goTo('quests')
     },
     {
       id: 'contact',
@@ -163,6 +175,17 @@ export const buildCommands = (ctx: CommandContext): Command[] => {
       icon: LinkedInIcon,
       run: openLink(links.linkedin)
     },
+    ...sideQuests.map(
+      ({ id, title, link }) =>
+        link !== undefined && {
+          id: `quest-${id}`,
+          group: 'Links',
+          label: `Open ${splitTitle(title).name}`,
+          keywords: 'side quest personal project',
+          icon: Gamepad2,
+          run: openLink(link)
+        }
+    ),
 
     {
       id: 'shortcuts',

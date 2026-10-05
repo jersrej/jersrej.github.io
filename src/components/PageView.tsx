@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef } from 'react';
-import { firstWorkIndex, indexFromHash, steps, workProjects } from '../data/deck';
+import { firstQuestIndex, firstWorkIndex, indexFromHash, steps, workProjects } from '../data/deck';
+import { sideQuests } from '../data/sideQuests';
 import { AboutSection } from './sections/AboutSection';
 import { ContactSection } from './sections/ContactSection';
 import { HeroSection } from './sections/HeroSection';
@@ -81,7 +82,24 @@ export const PageView = ({ index, go }: PageViewProps) => {
         <AboutSection />
       </section>
       <section id="work" aria-label="Work" className={anchor}>
-        <ProjectsSection projects={workProjects} activeIndex={index - firstWorkIndex} stacked />
+        <ProjectsSection
+          section="work"
+          heading="Work"
+          intro="Client work. Products I helped build and ship."
+          projects={workProjects}
+          activeIndex={index - firstWorkIndex}
+          stacked
+        />
+      </section>
+      <section id="quests" aria-label="Side quests" className={anchor}>
+        <ProjectsSection
+          section="quests"
+          heading="Side quests"
+          intro="Not client work. Just things I wanted to exist."
+          projects={sideQuests}
+          activeIndex={index - firstQuestIndex}
+          stacked
+        />
       </section>
       {/* Tall enough that Contact can reach the reading line at the end of the page */}
       <section

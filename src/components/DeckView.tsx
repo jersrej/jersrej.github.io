@@ -1,5 +1,13 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { firstWorkIndex, sections, steps, workProjects, type SectionId } from '../data/deck';
+import {
+  firstQuestIndex,
+  firstWorkIndex,
+  sections,
+  steps,
+  workProjects,
+  type SectionId
+} from '../data/deck';
+import { sideQuests } from '../data/sideQuests';
 import { useAutoPlay } from '../hooks/useAutoPlay';
 import { useDeckInput } from '../hooks/useDeckInput';
 import { playTick } from '../utils/sound';
@@ -61,9 +69,9 @@ export const DeckView = ({
 
   const current = steps[index];
   const offsetOf = (id: SectionId) => sectionIds.indexOf(id) - sectionIds.indexOf(current.section);
-  // Outside the Work section this rests on the nearest project, so entering
+  // Outside its own section this rests on the nearest project, so entering
   // from either side lands on the right one
-  const projectIndex = Math.min(workProjects.length - 1, Math.max(0, index - firstWorkIndex));
+  const nearest = (first: number, count: number) => Math.min(count - 1, Math.max(0, index - first));
 
   return (
     <>
@@ -75,7 +83,22 @@ export const DeckView = ({
           <AboutSection />
         </Slide>
         <Slide offset={offsetOf('work')} label="Work">
-          <ProjectsSection projects={workProjects} activeIndex={projectIndex} />
+          <ProjectsSection
+            section="work"
+            heading="Work"
+            intro="Client work. Products I helped build and ship."
+            projects={workProjects}
+            activeIndex={nearest(firstWorkIndex, workProjects.length)}
+          />
+        </Slide>
+        <Slide offset={offsetOf('quests')} label="Side quests">
+          <ProjectsSection
+            section="quests"
+            heading="Side quests"
+            intro="Not client work. Just things I wanted to exist."
+            projects={sideQuests}
+            activeIndex={nearest(firstQuestIndex, sideQuests.length)}
+          />
         </Slide>
         <Slide offset={offsetOf('contact')} label="Contact">
           <ContactSection />
@@ -85,8 +108,10 @@ export const DeckView = ({
       <DeckControls index={index} onStep={step} onOpenShortcuts={onOpenShortcuts} />
 
       <p className="sr-only" aria-live="polite">
-        {current.project ? `Work: ${current.label}` : current.label}, slide {index + 1} of{' '}
-        {steps.length}
+        {current.project
+          ? `${sections.find((s) => s.id === current.section)?.label}: ${current.label}`
+          : current.label}
+        , slide {index + 1} of {steps.length}
         {autoPlay && ', auto play on'}
       </p>
     </>
