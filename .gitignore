@@ -25,3 +25,6 @@ dist-ssr
 
 # CV source (export to public/Jerson-Conmigo-CV.pdf)
 *.docx
+
+# Personal notes
+TODO.md

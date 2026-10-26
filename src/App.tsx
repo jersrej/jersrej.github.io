@@ -9,14 +9,19 @@ import { SkipToContent } from './components/SkipToContent';
 import { steps } from './data/deck';
 import { useDeck } from './hooks/useDeck';
 import { useGlobalShortcuts } from './hooks/useGlobalShortcuts';
+import { useIdle } from './hooks/useIdle';
 import { useKonamiCode } from './hooks/useKonamiCode';
 import { useSound } from './hooks/useSound';
 import { useTheme } from './hooks/useTheme';
 import { useViewMode } from './hooks/useViewMode';
 
 const BugHunter = lazy(() => import('./components/BugHunter'));
+const IdleScene = lazy(() => import('./components/IdleScene'));
 
-type Overlay = 'palette' | 'shortcuts' | 'game';
+// How long without any input before the idle scene plays
+const IDLE_MS = 60_000;
+
+type Overlay = 'palette' | 'shortcuts' | 'game' | 'idle';
 
 export default function App() {
   const { index, go, step } = useDeck();
@@ -37,9 +42,13 @@ export default function App() {
   );
   const openShortcuts = useCallback(() => setOverlay('shortcuts'), []);
   const openGame = useCallback(() => setOverlay('game'), []);
+  const openIdleScene = useCallback(() => setOverlay('idle'), []);
+  const closeIdleScene = useCallback(() => setOverlay((o) => (o === 'idle' ? null : o)), []);
 
   useGlobalShortcuts({ onTogglePalette: togglePalette, onOpenShortcuts: openShortcuts });
   useKonamiCode(openGame);
+  // Never over another overlay or while auto play is presenting the deck
+  useIdle(IDLE_MS, overlay === null && !autoPlay, openIdleScene);
 
   const toggleAutoPlay = () => {
     // Starting from the last slide replays the deck from the top
@@ -63,7 +72,8 @@ export default function App() {
     toggleMode,
     cycleTheme,
     openShortcuts,
-    openGame
+    openGame,
+    openIdleScene
   });
 
   return (
@@ -108,6 +118,11 @@ export default function App() {
       {overlay === 'game' && (
         <Suspense fallback={null}>
           <BugHunter open onClose={close('game')} sound={sound.enabled} />
+        </Suspense>
+      )}
+      {overlay === 'idle' && (
+        <Suspense fallback={null}>
+          <IdleScene onClose={closeIdleScene} />
         </Suspense>
       )}
     </div>

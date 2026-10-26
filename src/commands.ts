@@ -3,6 +3,7 @@ import {
   ArrowRight,
   Bug,
   FileText,
+  Flashlight,
   FolderOpen,
   GalleryHorizontal,
   Gamepad2,
@@ -50,6 +51,7 @@ interface CommandContext {
   cycleTheme: () => void;
   openShortcuts: () => void;
   openGame: () => void;
+  openIdleScene: () => void;
 }
 
 // Section links go through the URL hash, which both views already understand
@@ -203,6 +205,14 @@ export const buildCommands = (ctx: CommandContext): Command[] => {
       keywords: 'game easter egg konami fun',
       icon: Bug,
       run: ctx.openGame
+    },
+    {
+      id: 'idle-scene',
+      group: 'More',
+      label: 'Wanna see something cool?',
+      keywords: 'idle scene suikoden pixel easter egg spotlight fun',
+      icon: Flashlight,
+      run: ctx.openIdleScene
     }
   ];
 
