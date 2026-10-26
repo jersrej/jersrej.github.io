@@ -93,12 +93,7 @@ export const Header = ({
               >
                 {autoPlay ? <Pause className="size-4" /> : <Play className="size-4" />}
               </IconButton>
-              <IconButton
-                label="Navigation sound"
-                pressed={sound}
-                onClick={onSoundToggle}
-                className="max-sm:hidden"
-              >
+              <IconButton label="Navigation sound" pressed={sound} onClick={onSoundToggle}>
                 {sound ? <Volume2 className="size-4" /> : <VolumeX className="size-4" />}
               </IconButton>
             </>

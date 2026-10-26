@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# CV source (export to public/Jerson-Conmigo-CV.pdf)
+*.docx

@@ -17,18 +17,36 @@ export const projects: Project[] = [
   {
     id: 'auto-mossa',
     title: 'Auto Mossa – Front‑End Development',
-    tagline: 'International automotive parts ordering portal',
+    tagline:
+      'Ordering system for a manufacturer of high‑speed industrial doors and safety barriers',
     stack: 'ReactJS · TypeScript · TailwindCSS · ShadCN · GraphQL',
     contributions: [
-      'Developed and enhanced UI features using React + ShadCN',
-      'Built reusable, responsive UI components integrated with backend endpoints',
+      'Built reusable, responsive UI components with React + ShadCN',
+      'Integrated GraphQL APIs into the ordering workflows',
       'Implemented UX improvements and addressed customer-requested enhancements',
       'Ensured consistent styling, accessibility, and maintainability across the application'
     ],
     impact:
-      'Improved global ordering workflows through consistent UI patterns and scalable frontend components.',
+      'Supported ordering across New Zealand and the United States with consistent UI patterns and scalable frontend components.',
     featured: false,
     link: 'https://www.automossa.com/'
+  },
+  {
+    id: 'bbsdt',
+    title: 'BBSDT – Senior Software Engineer',
+    tagline:
+      "Broadband self-service platform for one of the country's leading telecom companies, built at Stratpoint Global Outsourcing, Inc.",
+    stack: 'Next.js · TypeScript · Okta OIDC · React Hook Form · Zod · Vitest · NestJS',
+    contributions: [
+      'Architected a Next.js (App Router) frontend with a Backend-for-Frontend layer, keeping tokens and API calls on the server',
+      'Implemented enterprise SSO with Okta OIDC (Authorization Code + PKCE) and re-authentication for compliance',
+      'Designed granular role-based access control around a centralized permission registry',
+      'Replaced an in-memory session store with stateless, encrypted, httpOnly cookies',
+      'Added idle detection with countdown warnings, automatic sign-out, and single active session detection'
+    ],
+    impact:
+      "A complete rebuild of the client's Handyman v1 platform with a modern architecture for security, scalability, and maintainability.",
+    featured: true
   },
   {
     id: 'beyond',
@@ -36,11 +54,10 @@ export const projects: Project[] = [
     tagline: 'SaaS platform for business strategy, accountability, and execution',
     stack: 'ReactJS · TypeScript · TailwindCSS · ShadCN · Vite · REST API',
     contributions: [
-      'Built and enhanced UI features using React, TypeScript, Tailwind, and ShadCN',
-      'Maintained UI performance, refactored components, and fixed UX defects',
-      'Upgraded front‑end build system from CRA to Vite for better DX and speed',
-      'Monitored deployment logs and collaborated on release decisions',
-      'Coordinated with backend (.NET/MS SQL) and Azure teams for smooth releases'
+      'Spearheaded the migration from Create React App to Vite, improving build speed and developer experience',
+      'Refactored and optimized UI components using React, TypeScript, Tailwind, and ShadCN',
+      'Supported backend architects and Azure hosting teams during releases',
+      'Monitored deployment logs and collaborated on release decisions'
     ],
     impact:
       'Strengthened platform stability and improved development speed with the shift to Vite and cleaner UI architecture.',
@@ -51,7 +68,7 @@ export const projects: Project[] = [
     id: 'gleeson',
     title: 'Gleeson & Cox – JAWS TMS Front‑End Development',
     tagline: 'Mission‑critical Transport Management System for logistics operations',
-    stack: 'Ember.js · Handlebars · CSS · Google Maps API · oData · Swagger',
+    stack: 'Ember.js · Handlebars · CSS · Google Maps API · Swagger',
     contributions: [
       'Developed UI modules for their Ember.js‑based TMS (JAWS)',
       'Implemented new features and improved operational workflows',
@@ -67,16 +84,15 @@ export const projects: Project[] = [
   {
     id: 'lamido',
     title: 'Lamido – Product Management & Web Development',
-    tagline: 'Campaign execution and newsletter automation for e‑commerce operations',
+    tagline: 'Campaign execution and release QA for regional e‑commerce operations',
     stack: 'HTML · CSS · JavaScript · MySQL',
     contributions: [
-      'Created and debugged campaign pages for marketing initiatives',
-      'Handled QA coordination and testing workflows',
-      'Developed automated newsletter engine and responsive templates',
-      'Collaborated with category managers on promotional content'
+      'Created campaign pages for marketing initiatives',
+      'Coordinated campaign execution with other ventures',
+      'Managed regional QA checklists and release testing'
     ],
     impact:
-      'Improved campaign delivery accuracy and automated newsletter operations for regional markets.',
+      'Kept regional campaigns accurate and on schedule through coordinated QA and release testing.',
     featured: false
   },
   {
@@ -85,11 +101,11 @@ export const projects: Project[] = [
     tagline: 'Campaign pages, QA workflows, and frontend systems for Southeast Asia e‑commerce',
     stack: 'HTML · CSS · JavaScript · MySQL · CMS Tools',
     contributions: [
-      'Built and maintained landing pages for campaigns and promotions',
-      'Tested features pre‑release and resolved UI bugs across devices',
-      'Coordinated campaign execution with regional teams',
-      'Used MySQL for backend data validation',
-      'Handled CMS operations and asset uploads for high‑traffic events'
+      'Delegated frontend work and built campaign landing pages across devices',
+      'Coordinated campaign checklists with regional teams and managed pre‑release testing',
+      'Engineered an automated newsletter engine and redesigned its templates for Lazada Thailand',
+      'Promoted from Junior to Senior Web Developer within 16 months',
+      'Used MySQL queries for data'
     ],
     impact:
       'Supported high‑volume campaigns across Southeast Asia, ensuring accurate and timely releases.',
@@ -101,11 +117,9 @@ export const projects: Project[] = [
     tagline: 'Group gifting platform with real‑time contributions and digital gift card flow',
     stack: 'NestJS · ReactJS · TypeScript · TailwindCSS · NX Monorepo',
     contributions: [
-      'Developed frontend modules using React + TypeScript + TailwindCSS',
-      'Built NestJS APIs for wish‑lists, contributions, and redemption flows',
-      'Used NX monorepo tooling for modular FE/BE development',
-      'Integrated backend–frontend data flow for real‑time progress tracking',
-      'Conducted code reviews ensuring maintainability and best practices'
+      'Developed wish‑list, group contribution, and gift card redemption features, with supporting NestJS work',
+      'Shaped frontend architecture within an NX monorepo',
+      'Conducted frontend code reviews, reinforcing maintainable TypeScript patterns'
     ],
     impact:
       'Delivered a cohesive monorepo-based gifting platform with seamless contribution and redemption workflows.',
@@ -116,14 +130,14 @@ export const projects: Project[] = [
     id: 'polln',
     title: 'Polln – Lead Front‑End Developer',
     tagline: 'Digital healthcare platform (Patient · Doctor · Admin) with Zoom integration',
-    stack: 'ReactJS · TypeScript · TailwindCSS · GraphQL · AWS S3 · CI/CD · Zoom SDK',
+    stack: 'ReactJS · TypeScript · TailwindCSS · TanStack Query · Orval · GraphQL · AWS · Zoom SDK',
     contributions: [
-      'Led FE development across Patient, Doctor, and Admin applications',
-      'Translated Figma designs into responsive UI systems',
-      'Implemented GraphQL client layer for queries, mutations, and caching',
-      'Built CI/CD pipelines and managed multi‑environment deployments (Dev→Prod)',
-      'Collaborated closely with founder for product and UX decisions',
-      'Deployed applications to AWS S3 ensuring high performance and reliability'
+      'Led frontend development across the Patient, Doctor, and Admin applications',
+      'Headed the migration of the doctor and patient portals from Apollo GraphQL to REST',
+      'Introduced OpenAPI-driven type and hook generation with Orval, on a TanStack Query hook layer',
+      'Set up CI/CD pipelines on AWS across Development, QA, Staging, and Production',
+      'Advised the founders on technical decisions and product direction',
+      'Translated Figma designs into responsive React applications'
     ],
     impact:
       'Delivered a full telehealth ecosystem from scratch, enabling scalable online consultations and prescription workflows.',
@@ -132,15 +146,14 @@ export const projects: Project[] = [
   },
   {
     id: 'realista',
-    title: 'Realista – Front‑End Development',
+    title: 'Realista – Lead Front‑End Developer',
     tagline: 'Real estate platform for browsing and discovering property listings',
     stack: 'Laravel · JavaScript/jQuery · CSS · Google Maps · Bootstrap',
     contributions: [
-      'Converted PSD designs into responsive and functional web pages',
-      'Integrated front‑end views with Laravel backend logic',
-      'Implemented interactive UI components using JS/jQuery',
+      'Led the frontend implementation of the platform',
       'Integrated Google Maps for property search and location‑based navigation',
-      'Maintained UI consistency and optimized load performance'
+      'Applied SEO best practices and optimized load performance',
+      'Integrated front‑end views with Laravel backend logic'
     ],
     impact:
       'Provided a clean, map‑driven property browsing experience with responsive front‑end components.',
@@ -152,30 +165,29 @@ export const projects: Project[] = [
     tagline: 'Internal work‑log and budget tracking system',
     stack: 'ReactJS · TypeScript · TailwindCSS · Azure · GraphQL',
     contributions: [
-      'Converted legacy PHP system into a modern ReactJS application',
+      'Led the frontend redevelopment from a legacy PHP system to React',
       'Rebuilt UI using React + TailwindCSS for better performance and usability',
       'Implemented pages for work logs, budgets, and billing visibility',
       'Managed Azure deployments ensuring stable releases',
       'Improved UX with cleaner layouts and accessible data displays'
     ],
-    impact:
-      'Delivered a maintainable, modern UI that improved client billing accuracy and operational visibility.',
+    impact: 'Improved usability and deployment stability with a maintainable, modern UI.',
     featured: true
   },
   {
     id: 'xpo',
-    title: 'XPO Group – Full‑Stack Development',
-    tagline: 'Modernizing national expo management systems using NestJS + React',
-    stack: 'NestJS · ReactJS · TypeScript · TailwindCSS · REST API · GraphQL',
+    title: 'XPO Showtime – Full‑Stack Development',
+    tagline: "Event management platform rebuilt from XPO Group's internal systems",
+    stack: 'NestJS · ReactJS · TypeScript · TailwindCSS · REST API · GraphQL · Vitest',
     contributions: [
-      'Built core backend modules and scalable APIs in NestJS',
-      'Developed responsive React + Tailwind interfaces with shadcn/ui',
-      'Replaced legacy PHP workflows with modern service-based architecture',
-      'Helped establish reusable frontend component structures',
-      'Collaborated across engineering to ensure smooth system modernization'
+      'Redeveloped the frontend using React, TypeScript, and Tailwind CSS',
+      'Contributed to replacing a legacy PHP system with a Node.js and NestJS architecture',
+      'Provided backend support in NestJS for API implementation and service-layer logic',
+      'Established reusable frontend components and delivered responsive, accessible features',
+      'Wrote unit tests using Vitest'
     ],
     impact:
-      'Enabled migration from legacy systems to a scalable Node/NestJS architecture, supporting national expo operations.',
+      'Moved XPO Group off a legacy PHP system onto a modern Node.js and NestJS architecture.',
     featured: false,
     link: 'https://www.xpogroup.com/'
   }

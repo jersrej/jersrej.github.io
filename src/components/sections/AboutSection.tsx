@@ -3,10 +3,10 @@ import { yearsOfExperience, yearsWithReact } from '../../utils/constants';
 import { formatYears, yearsSince } from '../../utils/experience';
 
 const highlights = [
-  'Led frontend architecture for multiple high-traffic applications',
-  'Implemented design systems and reusable component libraries',
-  'Reduced bundle sizes significantly',
-  'Mentored junior developers'
+  'Led frontend development on multiple production applications',
+  'Delivered enterprise SSO, RBAC, and secure sessions in Next.js',
+  'Modernized legacy systems: PHP to React, CRA to Vite, GraphQL to REST',
+  'Managed frontend teams and mentored developers through code reviews'
 ];
 
 export const AboutSection = () => {
@@ -16,15 +16,15 @@ export const AboutSection = () => {
         <div>
           <h2 className="eyebrow">About</h2>
           <p className="mt-3 text-lg leading-snug font-medium tracking-tight md:text-[1.75rem] md:leading-[1.25] short:text-base">
-            Senior Frontend Engineer with {yearsOfExperience} years in the industry and{' '}
-            {yearsWithReact}+ specializing in React, TypeScript, and modern JavaScript ecosystems.
+            Senior Frontend Engineer and Tech Lead with {yearsOfExperience} years in web development
+            and {yearsWithReact}+ specializing in React, Next.js, and TypeScript.
           </p>
           <div className="roomy">
             <p className="mt-5 max-w-xl leading-relaxed text-muted">
-              I've delivered enterprise-grade applications across healthcare, logistics, SaaS,
-              e-commerce, and automotive platforms — building scalable UI architectures,
-              establishing reusable component systems, and owning frontend delivery from concept to
-              production.
+              I've worked across e-commerce, healthcare, SaaS, real estate, event management, and
+              telecom, with international and local clients and remote, distributed teams. I work
+              directly with founders, product owners, designers, and backend teams, with supporting
+              backend work in NestJS and Node.js.
             </p>
           </div>
         </div>

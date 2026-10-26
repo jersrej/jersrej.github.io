@@ -27,12 +27,13 @@ export const HeroSection = () => {
           </h1>
 
           <p className="mt-3 text-lg text-muted md:text-2xl">
-            Senior Frontend Engineer — React · TypeScript
+            Senior Frontend Engineer / Tech Lead — React · Next.js · TypeScript
           </p>
 
           <p className="mt-5 max-w-xl text-base leading-relaxed md:text-lg short:hidden">
-            I architect and deliver enterprise-scale frontend systems with a strong emphasis on
-            reliability, maintainability, and long-term product stability.
+            I lead frontend development on production platforms, currently a Next.js platform with
+            enterprise SSO, role-based access, and secure sessions for one of the country's leading
+            telecom companies.
           </p>
 
           <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-4 short:mt-4">
@@ -78,6 +79,15 @@ export const HeroSection = () => {
         <div className="roomy">
           <dl className="divide-y divide-line border-y border-line text-sm *:grid *:grid-cols-[6.5rem_minmax(0,1fr)] *:gap-x-4 *:py-2.5">
             <div>
+              <dt className="eyebrow">Now</dt>
+              <dd>
+                Senior Software Engineer at{' '}
+                <a href="#work/bbsdt" className="text-link">
+                  Stratpoint Global Outsourcing, Inc.
+                </a>
+              </dd>
+            </div>
+            <div>
               <dt className="eyebrow">Experience</dt>
               <dd>
                 {yearsOfExperience} years, since {startYear}
@@ -88,10 +98,6 @@ export const HeroSection = () => {
               <dd>
                 {yearsWithReact} years, since {reactStartYear}
               </dd>
-            </div>
-            <div>
-              <dt className="eyebrow">Domains</dt>
-              <dd>Healthcare, logistics, SaaS, e-commerce, automotive</dd>
             </div>
             <div>
               <dt className="eyebrow">Featured</dt>
