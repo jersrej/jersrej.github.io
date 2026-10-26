@@ -229,35 +229,60 @@ body {
 }
 
 /*
- * Idle scene: near-black, with a warm spotlight on the sprite in the bottom-right
- * corner and a pool of light on the floor under it. The variables track where
- * IdleScene places the sprite at each breakpoint.
+ * Idle scene: near-black, with a warm spotlight and a pool of light on the floor
+ * under whatever pose is playing. --idle-k scales the art (strip pixels to CSS px).
  */
 .idle-scene {
-  --spot-x: calc(100% - 5rem);
-  --spot-y: calc(100% - 6.5rem);
-  --floor-y: calc(100% - 3.7rem);
-  background:
-    radial-gradient(
-      ellipse 4.5rem 0.9rem at var(--spot-x) var(--floor-y),
-      rgb(255 236 200 / 0.14),
-      transparent 70%
-    ),
-    radial-gradient(
-      circle at var(--spot-x) var(--spot-y),
-      rgb(255 236 200 / 0.17) 0,
-      rgb(255 236 200 / 0.07) 5rem,
-      transparent 8.5rem
-    ),
-    rgb(5 6 8 / 0.97);
+  --idle-k: 0.34;
+  background: rgb(5 6 8 / 0.97);
 }
 
 @media (min-width: 48rem) {
   .idle-scene {
-    --spot-x: calc(100% - 7.5rem);
-    --spot-y: calc(100% - 7.9rem);
-    --floor-y: calc(100% - 4.7rem);
+    --idle-k: 0.4;
   }
+}
+
+.idle-art {
+  width: calc(var(--w) * var(--idle-k) * 1px);
+  height: calc(var(--h) * var(--idle-k) * 1px);
+  background-repeat: no-repeat;
+}
+
+/* Glows sit behind the art, sized from the box so wide poses (car, dogs) get a wider light */
+.idle-spot {
+  isolation: isolate;
+}
+
+.idle-spot::before,
+.idle-spot::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  z-index: -1;
+  translate: -50% 0;
+  pointer-events: none;
+}
+
+.idle-spot::before {
+  top: 50%;
+  width: max(12rem, 150%);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(255 236 200 / 0.17) 0,
+    rgb(255 236 200 / 0.07) 35%,
+    transparent 65%
+  );
+}
+
+.idle-spot::after {
+  bottom: -0.6rem;
+  width: 120%;
+  height: 1.6rem;
+  background: radial-gradient(ellipse at center, rgb(255 236 200 / 0.14), transparent 70%);
 }
 
 @keyframes idle-in {
