@@ -45,7 +45,7 @@ export const AboutSection = () => {
                       <span key={s.name}>
                         {s.name}
                         {s.since !== undefined && (
-                          <span className="ml-1.5 font-mono text-[10px] opacity-80 deck:max-md:hidden short:hidden">
+                          <span className="ml-1.5 font-mono text-[10px] deck:max-md:hidden short:hidden">
                             {formatYears(yearsSince(s.since, s.sinceMonth))}
                           </span>
                         )}

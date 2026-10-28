@@ -31,6 +31,8 @@ export const poses = {
 
 export type Pose = keyof typeof poses;
 
+export const artUrl = (pose: Pose) => `/idle/${pose}.webp`;
+
 /**
  * Overlays drawn in code on top of the art: a grid of single-character pixels,
  * `.` transparent and every other character a key in `palette`.

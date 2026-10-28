@@ -3,18 +3,20 @@ import {
   ArrowRight,
   Bug,
   FileText,
-  Flashlight,
   FolderOpen,
   GalleryHorizontal,
+  GalleryVerticalEnd,
   Gamepad2,
   Hand,
   Keyboard,
   Mail,
+  Palette,
   Pause,
   Play,
   ScrollText,
   Sparkles,
   SunMoon,
+  Trophy,
   User,
   Volume2,
   VolumeX,
@@ -24,6 +26,7 @@ import { GitHubIcon, LinkedInIcon } from './components/BrandIcons';
 import { links } from './data/links';
 import { splitTitle } from './data/projects';
 import { sideQuests } from './data/sideQuests';
+import { achievements } from './data/achievements';
 import type { Theme } from './hooks/useTheme';
 import type { ViewMode } from './hooks/useViewMode';
 
@@ -42,6 +45,7 @@ export type Command = {
 interface CommandContext {
   mode: ViewMode;
   theme: Theme;
+  achievementCount: number;
   autoPlay: boolean;
   sound: boolean;
   step: (delta: number) => void;
@@ -49,9 +53,11 @@ interface CommandContext {
   toggleSound: () => void;
   toggleMode: () => void;
   cycleTheme: () => void;
+  openAppearance: () => void;
+  openAchievements: () => void;
   openShortcuts: () => void;
   openGame: () => void;
-  openIdleScene: () => void;
+  openGallery: () => void;
 }
 
 // Section links go through the URL hash, which both views already understand
@@ -138,6 +144,14 @@ export const buildCommands = (ctx: CommandContext): Command[] => {
       icon: SunMoon,
       run: ctx.cycleTheme
     },
+    {
+      id: 'appearance',
+      group: 'View',
+      label: 'Appearance',
+      keywords: 'look style accent color palette theme terminal retro classic skin',
+      icon: Palette,
+      run: ctx.openAppearance
+    },
     isDeck && {
       id: 'autoplay',
       group: 'View',
@@ -207,12 +221,22 @@ export const buildCommands = (ctx: CommandContext): Command[] => {
       run: ctx.openGame
     },
     {
-      id: 'idle-scene',
+      id: 'achievements',
       group: 'More',
-      label: 'Wanna see something cool?',
-      keywords: 'idle scene suikoden pixel easter egg spotlight fun',
-      icon: Flashlight,
-      run: ctx.openIdleScene
+      label: 'Achievements',
+      keywords: 'trophies badges unlock secrets',
+      hint: `${ctx.achievementCount}/${achievements.length}`,
+      icon: Trophy,
+      run: ctx.openAchievements
+    },
+    {
+      id: 'idle-gallery',
+      group: 'More',
+      label: 'A day in the life',
+      keywords:
+        'idle scene gallery poses pixel art sprites suikoden easter egg spotlight something cool fun',
+      icon: GalleryVerticalEnd,
+      run: ctx.openGallery
     }
   ];
 

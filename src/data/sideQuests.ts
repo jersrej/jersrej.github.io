@@ -10,7 +10,7 @@ export const sideQuests: Project[] = [
     contributions: [
       'Built a folding two-screen device with a searchable index and a detail view',
       'Kept it Generation I: Red/Blue sprites, the original types and cries',
-      'Added display modes, favourites, keyboard navigation and sound effects',
+      'Added display modes, favorites, keyboard navigation and sound effects',
       'Wrote a typed data layer over PokéAPI with TanStack Query'
     ],
     impact: 'A faithful Kanto Pokédex that runs entirely in the browser.',
@@ -29,7 +29,7 @@ export const sideQuests: Project[] = [
       'Kept the game API behind a Backend-for-Frontend layer in Next.js',
       'Designed a retro-console design system on top of ShadCN'
     ],
-    impact: 'A quick way to pick your next game from a catalogue of 500,000+.',
+    impact: 'A quick way to pick your next game from a catalog of 500,000+.',
     link: 'https://jersrej-gamedex.vercel.app/',
     repo: 'https://github.com/jersrej/gamedex',
     featured: false

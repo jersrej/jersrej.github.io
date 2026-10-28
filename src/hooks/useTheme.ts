@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { flushSync } from 'react-dom';
+import { crossfade } from '../utils/crossfade';
 
 export type Theme = 'light' | 'dark' | 'system';
 
@@ -31,19 +31,10 @@ export function useTheme() {
     localStorage.setItem('theme', newTheme);
 
     // Everything that changes with the theme must happen inside this one step
-    const update = () => {
+    crossfade(() => {
       applyTheme(newTheme);
-      flushSync(() => setTheme(newTheme));
-    };
-
-    // Crossfade the whole page between themes where the browser can; with
-    // reduced motion (or no support) the change is immediate
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if ('startViewTransition' in document && !reducedMotion) {
-      document.startViewTransition(update);
-    } else {
-      update();
-    }
+      setTheme(newTheme);
+    });
   };
 
   const cycleTheme = () => {

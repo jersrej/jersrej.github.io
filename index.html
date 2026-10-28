@@ -85,6 +85,8 @@
           if (dark) document.documentElement.classList.add('dark');
           document.documentElement.dataset.mode =
             localStorage.getItem('view-mode') === 'page' ? 'page' : 'deck';
+          document.documentElement.dataset.look = localStorage.getItem('look') || 'classic';
+          document.documentElement.dataset.accent = localStorage.getItem('accent') || 'orange';
         } catch (e) {}
       })();
     </script>

@@ -48,7 +48,7 @@
 }
 
 /*
- * Graphite and signal: cool grey neutrals with one orange.
+ * Graphite and signal: cool gray neutrals with one orange.
  *   paper / surface  page background / raised panels (dialogs, chips)
  *   ink / muted      primary text / secondary text and metadata
  *   line             borders and dividers
@@ -75,6 +75,92 @@
   --line: #2a3034;
   --accent: #ff7a33;
   --accent-2: #7cc0cc;
+}
+
+/*
+ * Accent colors, picked in the Appearance panel (useLook). Each [data-accent]
+ * resolves --accent-pick for the current theme, so the panel's swatches and
+ * the page share these values. Classic look only: Terminal and Retro bring
+ * their own. Each keeps text contrast on its paper.
+ */
+[data-accent='orange'] {
+  --accent-pick: #b83a0a;
+}
+.dark [data-accent='orange'],
+.dark[data-accent='orange'] {
+  --accent-pick: #ff7a33;
+}
+[data-accent='blue'] {
+  --accent-pick: #1d5fc0;
+}
+.dark [data-accent='blue'],
+.dark[data-accent='blue'] {
+  --accent-pick: #6aa6ff;
+}
+[data-accent='violet'] {
+  --accent-pick: #6b3fc6;
+}
+.dark [data-accent='violet'],
+.dark[data-accent='violet'] {
+  --accent-pick: #b39bff;
+}
+[data-accent='green'] {
+  --accent-pick: #2a7a3a;
+}
+.dark [data-accent='green'],
+.dark[data-accent='green'] {
+  --accent-pick: #66d17a;
+}
+[data-accent='pink'] {
+  --accent-pick: #b8326c;
+}
+.dark [data-accent='pink'],
+.dark[data-accent='pink'] {
+  --accent-pick: #ff7eb0;
+}
+
+:root[data-look='classic'][data-accent] {
+  --accent: var(--accent-pick);
+}
+
+/* Terminal: a paper printout in light, green phosphor in dark, monospace everywhere */
+:root[data-look='terminal'] {
+  --paper: #f3f1e6;
+  --surface: #fbfaf3;
+  --ink: #1d3a1d;
+  --muted: #4c6b4c;
+  --line: #d3d6c3;
+  --accent: #1f7a2c;
+  --accent-2: #8a5a00;
+}
+:root.dark[data-look='terminal'] {
+  --paper: #090e09;
+  --surface: #0f170f;
+  --ink: #b8f5b0;
+  --muted: #74b36d;
+  --line: #1f3a1f;
+  --accent: #4cff6a;
+  --accent-2: #ffcc66;
+}
+
+/* Retro (unlocked by an achievement): a Game Boy in light, a 16-bit menu window in dark */
+:root[data-look='retro'] {
+  --paper: #cadc9f;
+  --surface: #dbe8b4;
+  --ink: #0f380f;
+  --muted: #306230;
+  --line: #8bac0f;
+  --accent: #7a3c00;
+  --accent-2: #1d4f8c;
+}
+:root.dark[data-look='retro'] {
+  --paper: #0b0e2a;
+  --surface: #182067;
+  --ink: #f5f3e7;
+  --muted: #aab0e0;
+  --line: #39408f;
+  --accent: #ffd34d;
+  --accent-2: #7fe0ff;
 }
 
 ::selection {
@@ -243,6 +329,11 @@ body {
   }
 }
 
+/* Gallery tiles: small enough that the car and the dogs fit a tile */
+.idle-gallery {
+  --idle-k: 0.26;
+}
+
 .idle-art {
   width: calc(var(--w) * var(--idle-k) * 1px);
   height: calc(var(--h) * var(--idle-k) * 1px);
@@ -405,5 +496,192 @@ body {
   #loader .loader-bar span {
     width: 100%;
     animation: none;
+  }
+}
+
+/*
+ * Looks (see useLook). Colors live with the tokens at the top; these change type and shape.
+ * Theme tokens are inlined by Tailwind, so the font stacks are spelled out here.
+ */
+[data-look='terminal'] body,
+[data-look='terminal'] .display,
+[data-look='terminal'] .font-sans {
+  font-family: 'Martian Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-variation-settings: 'wdth' 75;
+}
+
+[data-look='terminal'] .display {
+  font-weight: 500;
+  letter-spacing: -0.05em;
+}
+
+/* Monospace runs wider and so taller: everything a touch smaller, the name most of all */
+:root[data-look='terminal'] {
+  font-size: 93.75%;
+}
+
+[data-look='terminal'] .hero-name {
+  font-size: clamp(2rem, min(6.5vw, 11vh), 4.25rem);
+}
+
+/* A prompt before the name, and the logo's square dot becomes a blinking cursor */
+[data-look='terminal'] .hero-name::before {
+  content: '> ' / '';
+  color: var(--accent);
+}
+
+[data-look='terminal'] .name-dot {
+  width: 0.5em;
+  height: 0.75em;
+  margin-left: 0.15em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-look='terminal'] .name-dot {
+    animation: cursor-blink 1.1s steps(1) infinite;
+  }
+}
+
+@keyframes cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Pixel type for headings, labels, the nav and buttons; running text stays in the normal face to stay readable */
+[data-look='retro'] .display,
+[data-look='retro'] .eyebrow,
+[data-look='retro'] .font-mono,
+[data-look='retro'] .kbd,
+[data-look='retro'] button {
+  font-family: 'Pixelify Sans', ui-monospace, monospace;
+  font-variation-settings: normal;
+  -webkit-font-smoothing: none;
+}
+
+[data-look='retro'] .display {
+  letter-spacing: 0.02em;
+  /* A hard offset shadow, like a 16-bit title screen */
+  text-shadow: 0.06em 0.06em 0 var(--line);
+}
+
+[data-look='retro'] .eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+/* A pixel arrow cursor (links keep the browser's hand), and an RPG menu cursor on the current section */
+[data-look='retro'] body {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='34' viewBox='0 0 12 17' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23111'/%3E%3Crect x='0' y='1' width='2' height='1' fill='%23111'/%3E%3Crect x='0' y='2' width='1' height='1' fill='%23111'/%3E%3Crect x='1' y='2' width='1' height='1' fill='%23fff'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%23111'/%3E%3Crect x='0' y='3' width='1' height='1' fill='%23111'/%3E%3Crect x='1' y='3' width='2' height='1' fill='%23fff'/%3E%3Crect x='3' y='3' width='1' height='1' fill='%23111'/%3E%3Crect x='0' y='4' width='1' height='1' fill='%23111'/%3E%3Crect x='1' y='4' width='3' height='1' fill='%23fff'/%3E%3Crect x='4' y='4' width='1' height='1' fill='%23111'/%3E%3Crect x='0' y='5' width='1' height='1' fill='%23111'/%3E%3Crect x='1' y='5' width='4' height='1' fill='%23fff'/%3E%3Crect x='5' y='5' width='1' height='1' fill='%23111'/%3E%3Crect x='0' y='6' width='1' height='1' fill='%23111'/%3E%3Crect x='1' y='6' width='5' height='1' fill='%23fff'/%3E%3Crect x='6' y='6' width='1' height='1' fill='%23111'/%3E%3Crect x='0' y='7' width='1' height='1' fill='%23111'/%3E%3Crect x='1' y='7' width='6' height='1' fill='%23fff'/%3E%3Crect x='7' y='7' width='1' height='1' fill='%23111'/%3E%3Crect x='0' y='8' width='1' height='1' fill='%23111'/%3E%3Crect x='1' y='8' width='7' height='1' fill='%23fff'/%3E%3Crect x='8' y='8' width='1' height='1' fill='%23111'/%3E%3Crect x='0' y='9' width='1' height='1' fill='%23111'/%3E%3Crect x='1' y='9' width='8' height='1' fill='%23fff'/%3E%3Crect x='9' y='9' width='1' height='1' fill='%23111'/%3E%3Crect x='0' y='10' width='1' height='1' fill='%23111'/%3E%3Crect x='1' y='10' width='5' height='1' fill='%23fff'/%3E%3Crect x='6' y='10' width='5' height='1' fill='%23111'/%3E%3Crect x='0' y='11' width='1' height='1' fill='%23111'/%3E%3Crect x='1' y='11' width='2' height='1' fill='%23fff'/%3E%3Crect x='3' y='11' width='1' height='1' fill='%23111'/%3E%3Crect x='4' y='11' width='2' height='1' fill='%23fff'/%3E%3Crect x='6' y='11' width='1' height='1' fill='%23111'/%3E%3Crect x='0' y='12' width='1' height='1' fill='%23111'/%3E%3Crect x='1' y='12' width='1' height='1' fill='%23fff'/%3E%3Crect x='2' y='12' width='1' height='1' fill='%23111'/%3E%3Crect x='4' y='12' width='1' height='1' fill='%23111'/%3E%3Crect x='5' y='12' width='2' height='1' fill='%23fff'/%3E%3Crect x='7' y='12' width='1' height='1' fill='%23111'/%3E%3Crect x='0' y='13' width='2' height='1' fill='%23111'/%3E%3Crect x='4' y='13' width='1' height='1' fill='%23111'/%3E%3Crect x='5' y='13' width='2' height='1' fill='%23fff'/%3E%3Crect x='7' y='13' width='1' height='1' fill='%23111'/%3E%3Crect x='0' y='14' width='1' height='1' fill='%23111'/%3E%3Crect x='5' y='14' width='1' height='1' fill='%23111'/%3E%3Crect x='6' y='14' width='2' height='1' fill='%23fff'/%3E%3Crect x='8' y='14' width='1' height='1' fill='%23111'/%3E%3Crect x='5' y='15' width='1' height='1' fill='%23111'/%3E%3Crect x='6' y='15' width='2' height='1' fill='%23fff'/%3E%3Crect x='8' y='15' width='1' height='1' fill='%23111'/%3E%3Crect x='6' y='16' width='2' height='1' fill='%23111'/%3E%3C/svg%3E")
+      0 0,
+    auto;
+}
+
+[data-look='retro'] nav a[aria-current]::before {
+  content: '▶' / '';
+  margin-right: 0.4em;
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-look='retro'] nav a[aria-current]::before {
+    animation: cursor-blink 0.9s steps(1) infinite;
+  }
+}
+
+/* Square corners, hard drop shadows and menu-window borders, like a 16-bit RPG */
+[data-look='retro'] *,
+[data-look='retro'] dialog {
+  border-radius: 0 !important;
+}
+
+[data-look='retro'] .btn {
+  border-width: 2px;
+  box-shadow: 3px 3px 0 var(--line);
+}
+
+[data-look='retro'] .btn:active {
+  translate: 2px 2px;
+  box-shadow: 1px 1px 0 var(--line);
+}
+
+[data-look='retro'] dialog {
+  border: 3px solid var(--ink);
+  box-shadow:
+    inset 0 0 0 2px var(--line),
+    6px 6px 0 rgb(0 0 0 / 0.35);
+}
+
+/* Scanlines over everything except dialogs, which sit in the browser's top layer */
+[data-look='retro'] body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgb(0 0 0 / 0.07) 0 1px, transparent 1px 3px);
+}
+
+/* Achievement toast: slides up from the bottom corner */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    translate: 0 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .toast-in {
+    animation: toast-in 250ms ease-out both;
+  }
+}
+
+/*
+ * Print: the long page (usePrintView switches to it) in black on white, with
+ * the chrome left out and link targets spelled out, whatever the look.
+ */
+@media print {
+  :root {
+    --paper: #fff !important;
+    --surface: #fff !important;
+    --ink: #111 !important;
+    --muted: #4a4a4a !important;
+    --line: #ccc !important;
+    --accent: #111 !important;
+    --accent-2: #111 !important;
+    color-scheme: light;
+  }
+
+  header[role='banner'],
+  dialog,
+  [popover],
+  #loader,
+  .idle-scene {
+    display: none !important;
+  }
+
+  [data-look='retro'] body::after {
+    display: none;
+  }
+
+  [data-mode='page'] .slide {
+    padding-block: 1.25rem;
+  }
+
+  #intro,
+  #contact {
+    min-height: auto;
+  }
+
+  article,
+  li {
+    break-inside: avoid;
+  }
+
+  a[target='_blank']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: var(--muted);
   }
 }

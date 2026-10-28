@@ -1,5 +1,7 @@
 import { Bug as BugIcon, X } from 'lucide-react';
 import { useEffect, useReducer, useRef } from 'react';
+import { EXTERMINATOR_SCORE } from '../data/achievements';
+import { unlock } from '../utils/achievements';
 import { playTick } from '../utils/sound';
 import { Dialog } from './Dialog';
 
@@ -145,6 +147,7 @@ const Game = ({ onClose, sound }: Omit<BugHunterProps, 'open'>) => {
 
   useEffect(() => {
     if (score > 0 && sound) playTick();
+    if (score >= EXTERMINATOR_SCORE) unlock('exterminator');
   }, [score, sound]);
 
   const field = useRef<HTMLDivElement>(null);
@@ -226,10 +229,17 @@ const Game = ({ onClose, sound }: Omit<BugHunterProps, 'open'>) => {
                 </span>
               </p>
             ) : (
-              <p className="max-w-xs text-sm leading-relaxed text-muted">
-                Bugs are heading for production. Click or tap one — or press its letter — before its
-                timer runs out. Three escapes end the run.
-              </p>
+              <div className="max-w-xs text-sm leading-relaxed text-muted">
+                <p>
+                  Bugs are heading for production. Click or tap one — or press its letter — before
+                  its timer runs out. Three escapes end the run.
+                </p>
+                <p className="mt-2">
+                  {best > 0 ? `Your best is ${best}. ` : ''}
+                  {best < EXTERMINATOR_SCORE &&
+                    `Squash ${EXTERMINATOR_SCORE} in one run to unlock something.`}
+                </p>
+              </div>
             )}
             <button
               type="button"

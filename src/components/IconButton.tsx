@@ -6,6 +6,9 @@ interface IconButtonProps {
   onClick: () => void;
   /** For on/off controls: whether the control is currently on */
   pressed?: boolean;
+  /** For a control that opens a panel: the panel's id, and whether it is open */
+  controls?: string;
+  expanded?: boolean;
   className?: string;
   children: ReactNode;
 }
@@ -14,6 +17,8 @@ export const IconButton = ({
   label,
   onClick,
   pressed,
+  controls,
+  expanded,
   className = '',
   children
 }: IconButtonProps) => (
@@ -22,8 +27,10 @@ export const IconButton = ({
     onClick={onClick}
     aria-label={label}
     aria-pressed={pressed}
+    aria-controls={controls}
+    aria-expanded={expanded}
     className={`group relative flex size-9 shrink-0 items-center justify-center rounded-md border transition-colors ${
-      pressed
+      pressed || expanded
         ? 'border-accent text-accent'
         : 'border-line text-muted hover:border-ink hover:text-ink'
     } ${className}`}

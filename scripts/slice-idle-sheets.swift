@@ -1,6 +1,6 @@
 // Slices the idle-scene sprite sheets (art/idle/sheet-N.png) into one horizontal
 // strip per pose. Rows are found by their transparent gaps; each sprite piece
-// belongs to the frame whose grid cell holds its centre; frames are then aligned
+// belongs to the frame whose grid cell holds its center; frames are then aligned
 // to the first by shape, so only the moving parts move.
 //
 //   swiftc -O scripts/slice-idle-sheets.swift -o /tmp/slice-idle
@@ -108,7 +108,7 @@ for sheet in 1...6 {
   for (row, band) in zip(rowsWanted, bands) {
     let pitch = Double(w) / 4 * Double(row.span)
     let blobs = runs(0..<w, gap: 3) { x in (band.0...band.1).contains { solid(x, $0) } }
-    // Each blob belongs to the frame whose cell holds its centre
+    // Each blob belongs to the frame whose cell holds its center
     var boxes = [(Int, Int)?](repeating: nil, count: row.frames)
     for b in blobs {
       let i = min(row.frames - 1, Int(Double(b.0 + b.1) / 2 / pitch))

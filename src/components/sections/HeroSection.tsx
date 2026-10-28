@@ -1,5 +1,6 @@
 import { ArrowRight, ArrowUpRight, Download } from 'lucide-react';
 import { links } from '../../data/links';
+import { now } from '../../data/now';
 import { splitTitle } from '../../data/projects';
 import {
   featured,
@@ -8,6 +9,7 @@ import {
   yearsOfExperience,
   yearsWithReact
 } from '../../utils/constants';
+import { greetingName } from '../../utils/greeting';
 import { GitHubIcon, LinkedInIcon } from '../BrandIcons';
 
 export const HeroSection = () => {
@@ -15,15 +17,24 @@ export const HeroSection = () => {
     <div className="slide">
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-end lg:gap-16">
         <div>
+          {greetingName && (
+            <p className="mb-3 text-sm font-medium text-accent">
+              Hi {greetingName} 👋 thanks for taking a look.
+            </p>
+          )}
           <p className="eyebrow flex items-center gap-2">
             <span className="mark bg-accent" aria-hidden="true" />
-            Available for new opportunities
+            {now.availability}
           </p>
 
-          <h1 className="display mt-4 text-[clamp(2.75rem,min(9vw,15vh),5.75rem)] lg:text-[clamp(2.75rem,min(6.2vw,15vh),5.75rem)] short:mt-2">
+          <h1 className="hero-name display mt-4 text-[clamp(2.75rem,min(9vw,15vh),5.75rem)] lg:text-[clamp(2.75rem,min(6.2vw,15vh),5.75rem)] short:mt-2">
             Jerson Q. Conmigo
             {/* The logo's square dot closes the name */}
-            <span className="ml-[0.05em] inline-block size-[0.15em] bg-accent" aria-hidden="true" />
+            {/* In the Terminal look it becomes a blinking cursor (styles.css) */}
+            <span
+              className="name-dot ml-[0.05em] inline-block size-[0.15em] bg-accent"
+              aria-hidden="true"
+            />
           </h1>
 
           <p className="mt-3 text-lg text-muted md:text-2xl">
@@ -46,7 +57,7 @@ export const HeroSection = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="btn"
-              aria-label="Download Jerson Conmigo's CV (PDF)"
+              aria-label="Download CV (PDF)"
             >
               <Download className="size-4" aria-hidden="true" />
               Download CV
@@ -86,6 +97,10 @@ export const HeroSection = () => {
                   Stratpoint Global Outsourcing, Inc.
                 </a>
               </dd>
+            </div>
+            <div>
+              <dt className="eyebrow">Learning</dt>
+              <dd>{now.learning}</dd>
             </div>
             <div>
               <dt className="eyebrow">Experience</dt>

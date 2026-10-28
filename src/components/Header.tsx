@@ -3,12 +3,14 @@ import {
   Download,
   Ellipsis,
   GalleryHorizontal,
+  Palette,
   Pause,
   Play,
   ScrollText,
   Volume2,
   VolumeX
 } from 'lucide-react';
+import type { ReactNode } from 'react';
 import type { SectionId } from '../data/deck';
 import { links } from '../data/links';
 import type { Theme } from '../hooks/useTheme';
@@ -29,6 +31,10 @@ interface HeaderProps {
   sound: boolean;
   onSoundToggle: () => void;
   onOpenPalette: () => void;
+  appearanceOpen: boolean;
+  onAppearanceToggle: () => void;
+  /** The Appearance panel, shown under the header's buttons while open */
+  appearancePanel: ReactNode;
 }
 
 export const Header = ({
@@ -41,7 +47,10 @@ export const Header = ({
   onAutoPlayToggle,
   sound,
   onSoundToggle,
-  onOpenPalette
+  onOpenPalette,
+  appearanceOpen,
+  onAppearanceToggle,
+  appearancePanel
 }: HeaderProps) => {
   const isDeck = mode === 'deck';
 
@@ -70,7 +79,7 @@ export const Header = ({
           }
         />
 
-        <div className="flex items-center gap-1 lg:gap-2">
+        <div className="relative flex items-center gap-1 lg:gap-2">
           <a
             href={links.cv}
             target="_blank"
@@ -106,10 +115,19 @@ export const Header = ({
             {isDeck ? <ScrollText className="size-4" /> : <GalleryHorizontal className="size-4" />}
           </IconButton>
           <ThemeToggle theme={theme} onCycle={onThemeCycle} />
+          <IconButton
+            label="Appearance"
+            controls="appearance-panel"
+            expanded={appearanceOpen}
+            onClick={onAppearanceToggle}
+          >
+            <Palette className="size-4" />
+          </IconButton>
           <IconButton label="Command menu" onClick={onOpenPalette}>
             <Command className="size-4 max-sm:hidden" />
             <Ellipsis className="size-4 sm:hidden" />
           </IconButton>
+          {appearancePanel}
         </div>
       </div>
     </header>

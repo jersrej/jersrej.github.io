@@ -53,6 +53,10 @@ export const ContactSection = () => {
         <a href="#intro" className="text-link">
           Back to start
         </a>
+        {/* The idle scene never starts on touch screens (see useIdle) */}
+        <span className="ml-auto pointer-coarse:hidden print:hidden">
+          Psst: sit still for a minute
+        </span>
       </p>
     </div>
   );

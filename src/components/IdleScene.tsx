@@ -1,51 +1,15 @@
-import { useEffect, useMemo, useState, type CSSProperties } from 'react';
-import { bubbles, palette, poses, sleepZs, type Pose } from '../data/idleSprites';
+import { useEffect, useMemo, useState } from 'react';
+import { ENDING, MIDDLE, OPENING, type Scene } from '../data/idleScenes';
+import { unlock } from '../utils/achievements';
+import { artUrl, bubbles, palette, poses, sleepZs, type Pose } from '../data/idleSprites';
+import { IdleArt } from './IdleArt';
 
 interface IdleSceneProps {
   onClose: () => void;
+  /** Open on this pose (from the gallery) instead of at the start of the day */
+  startPose?: Pose;
 }
 
-/**
- * `bubble` pins one thought bubble (an index into `bubbles`) for the whole pose;
- * `holdMs` overrides how long the pose plays.
- */
-type Scene = { pose: Pose; caption: string; frameMs: number; bubble?: number; holdMs?: number };
-
-const QUESTION_BUBBLE = 2;
-
-// A day: opens on coding and ends with bedtime and waking up, then the next day
-// starts. In between, a random handful of these groups plays in random order; a
-// group's poses always stay together and in order.
-const OPENING: Scene[] = [{ pose: 'coding', caption: 'Coding…', frameMs: 300 }];
-const MIDDLE: Scene[][] = [
-  [{ pose: 'debugging', caption: 'Debugging…', frameMs: 350, bubble: QUESTION_BUBBLE }],
-  [{ pose: 'frustrated', caption: 'Frustrated…', frameMs: 500 }],
-  [{ pose: 'idea', caption: 'Eureka!', frameMs: 600 }],
-  [{ pose: 'music', caption: 'Vibing…', frameMs: 450 }],
-  [{ pose: 'pancit', caption: 'Pancit canton…', frameMs: 600 }],
-  [{ pose: 'shipped', caption: 'Shipped!', frameMs: 300 }],
-  [{ pose: 'stretching', caption: 'Stretching…', frameMs: 700 }],
-  [{ pose: 'coffee', caption: 'Coffee…', frameMs: 600 }],
-  [{ pose: 'walking', caption: 'Walking…', frameMs: 180 }],
-  [{ pose: 'running', caption: 'Running…', frameMs: 110 }],
-  [{ pose: 'adobo', caption: 'Cooking adobo…', frameMs: 450 }],
-  [{ pose: 'petting', caption: 'Petting…', frameMs: 450 }],
-  [{ pose: 'feeding', caption: 'Feeding the dogs…', frameMs: 700 }],
-  [{ pose: 'tv', caption: 'TV…', frameMs: 800 }],
-  [{ pose: 'reading', caption: 'Reading…', frameMs: 900 }],
-  [{ pose: 'driving', caption: 'Driving…', frameMs: 200 }],
-  [
-    { pose: 'charging', caption: 'Charging…', frameMs: 700 },
-    { pose: 'playing', caption: 'Playing…', frameMs: 600 }
-  ],
-  [{ pose: 'toilet', caption: 'Busy…', frameMs: 900 }]
-];
-const ENDING: Scene[] = [
-  // Two full rounds of scrolling until the phone lands on his face
-  { pose: 'scrolling', caption: 'Scrolling…', frameMs: 900, holdMs: 7200 },
-  { pose: 'sleeping', caption: 'Sleeping…', frameMs: 900, holdMs: 15000 },
-  { pose: 'waking', caption: 'Waking up…', frameMs: 900 }
-];
 const MIDDLE_PICKS = 6;
 const HOLD_MS = 6000;
 
@@ -58,11 +22,40 @@ const shuffle = <T,>(list: T[]) => {
   return out;
 };
 
-const buildSequence = () => [
-  ...OPENING,
-  ...shuffle(MIDDLE).slice(0, MIDDLE_PICKS).flat(),
-  ...ENDING
-];
+/**
+ * Where the day starts when no pose was picked: whatever I'd be doing at the
+ * visitor's local time. Working hours open on coding, the usual start.
+ */
+const poseForTime = (hour = new Date().getHours()): Pose | undefined => {
+  if (hour >= 23 || hour < 5) return 'scrolling';
+  if (hour < 9) return 'coffee';
+  if (hour === 12) return 'pancit';
+  if (hour >= 18 && hour < 20) return 'adobo';
+  if (hour >= 20) return 'tv';
+};
+
+// Watching this many poses and then waking up counts as a whole day
+const WHOLE_DAY_SCENES = 6;
+
+const pickMiddle = (groups: Scene[][], count: number) => shuffle(groups).slice(0, count).flat();
+
+// A starting pose plays out its group and the rest of that day, then days run as usual
+const buildSequence = (start?: Pose): Scene[] => {
+  const group = [OPENING, ...MIDDLE, ENDING].find((g) => g.some((s) => s.pose === start));
+  if (!group || group === OPENING)
+    return [...OPENING, ...pickMiddle(MIDDLE, MIDDLE_PICKS), ...ENDING];
+
+  const rest = group.slice(group.findIndex((s) => s.pose === start));
+  if (group === ENDING) return rest;
+  return [
+    ...rest,
+    ...pickMiddle(
+      MIDDLE.filter((g) => g !== group),
+      MIDDLE_PICKS - 1
+    ),
+    ...ENDING
+  ];
+};
 
 // Thought bubbles while coding: each stays up this long, with a random pause between them
 const BUBBLE_MS = 2200;
@@ -73,25 +66,11 @@ const MOVE_TOLERANCE = 12;
 
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const artUrl = (pose: Pose) => `/idle/${pose}.webp`;
 const preload = (pose: Pose) => {
   new Image().src = artUrl(pose);
 };
 
-/** One frame of a pose's strip, sized by the scene's scale (--idle-k in styles.css) */
-const Art = ({ pose, frame }: { pose: Pose; frame: number }) => {
-  const { frames, width, height } = poses[pose];
-  const style = {
-    '--w': width,
-    '--h': height,
-    backgroundImage: `url(${artUrl(pose)})`,
-    backgroundSize: `${frames * 100}% 100%`,
-    backgroundPosition: `${frames > 1 ? (frame / (frames - 1)) * 100 : 0}% 0`
-  } as CSSProperties;
-  return <div className="idle-art" style={style} />;
-};
-
-/** Code-drawn overlay (bubbles, Z's): one <rect> per horizontal run of same-coloured pixels */
+/** Code-drawn overlay (bubbles, Z's): one <rect> per horizontal run of same-colored pixels */
 const Pixels = ({ rows, className }: { rows: string[]; className: string }) => {
   const rects = useMemo(() => {
     const out: { x: number; y: number; w: number; fill: string }[] = [];
@@ -129,8 +108,8 @@ const Pixels = ({ rows, className }: { rows: string[]; className: string }) => {
  * idle for a while, or from the command menu. Any key, click, scroll or real
  * mouse movement brings the page back.
  */
-export default function IdleScene({ onClose }: IdleSceneProps) {
-  const [scenes, setScenes] = useState(buildSequence);
+export default function IdleScene({ onClose, startPose }: IdleSceneProps) {
+  const [scenes, setScenes] = useState(() => buildSequence(startPose ?? poseForTime()));
   const [sceneIndex, setSceneIndex] = useState(0);
   // Animation clock; each layer takes it modulo its own frame count
   const [tick, setTick] = useState(0);
@@ -141,6 +120,12 @@ export default function IdleScene({ onClose }: IdleSceneProps) {
   );
   const scene = scenes[sceneIndex];
   const shownBubble = scene.bubble ?? (scene.pose === 'coding' ? bubble : null);
+
+  // Poses watched in this visit to the scene
+  const [watched, setWatched] = useState(1);
+  useEffect(() => {
+    if (scene.pose === 'waking' && watched >= WHOLE_DAY_SCENES) unlock('whole-day');
+  }, [scene.pose, watched]);
 
   // Advance through the poses; after waking up, a new day starts with a fresh shuffle
   useEffect(() => {
@@ -155,6 +140,7 @@ export default function IdleScene({ onClose }: IdleSceneProps) {
         setSceneIndex(sceneIndex + 1);
       }
       setTick(0);
+      setWatched((n) => n + 1);
     }, scenes[sceneIndex].holdMs ?? HOLD_MS);
     return () => clearTimeout(timer);
   }, [sceneIndex, scenes]);
@@ -213,12 +199,12 @@ export default function IdleScene({ onClose }: IdleSceneProps) {
       onClick={onClose}
       className={`idle-scene fixed inset-0 z-50 cursor-pointer ${reducedMotion ? '' : 'idle-scene-fade'}`}
     >
-      <p className="eyebrow absolute top-6 left-6 text-white/40">Press any key to return</p>
+      <p className="eyebrow absolute top-6 left-6 text-white/60">Press any key to return</p>
 
       <div className="absolute right-6 bottom-8 flex flex-col items-center md:right-14 md:bottom-12">
         {/* The spotlight and floor glow follow this box, whatever the pose's size */}
         <div className="idle-spot relative">
-          <Art pose={scene.pose} frame={tick % poses[scene.pose].frames} />
+          <IdleArt pose={scene.pose} frame={tick % poses[scene.pose].frames} />
           {shownBubble !== null && (
             <Pixels
               rows={bubbles[shownBubble][tick % bubbles[shownBubble].length]}
